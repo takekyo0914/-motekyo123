@@ -654,6 +654,66 @@ input[type=range]{width:90px;accent-color:var(--gold);cursor:pointer;background:
 .forecast-keyword{font-size:15px;font-weight:900;color:var(--t1);margin-bottom:4px}
 .forecast-action{font-size:11px;color:var(--gold);font-weight:700;margin-top:6px}
 .forecast-reason{font-size:11px;color:var(--t3);line-height:1.5}
+
+/* ── SCENE CHIP ── */
+.scene-chip{background:var(--s2);border:1px solid var(--b1);border-radius:20px;padding:3px 10px;font-size:11px;color:var(--t3);cursor:pointer;transition:all .12s;white-space:nowrap}
+.scene-chip:hover{border-color:var(--purple);color:#c4b5fd}
+.scene-chip.active{background:rgba(139,92,246,.12);border-color:var(--purple);color:#c4b5fd}
+/* ── INLINE DREAMINA IN SECTION ── */
+.sc-dreamina{background:rgba(139,92,246,.06);border:1px solid rgba(139,92,246,.18);border-radius:8px;margin-top:9px;overflow:hidden}
+.sc-dreamina-hd{display:flex;align-items:center;justify-content:space-between;padding:7px 12px;background:rgba(139,92,246,.08)}
+.sc-dreamina-badge{font-size:9px;font-weight:800;color:var(--purple);letter-spacing:.8px}
+.sc-dreamina-hint{font-size:9px;color:rgba(196,181,253,.4)}
+.sc-dreamina-text{font-size:11px;color:#c4b5fd;font-family:'Courier New',monospace;line-height:1.65;word-break:break-word;padding:9px 12px;cursor:pointer;transition:all .12s}
+.sc-dreamina-text:hover{background:rgba(139,92,246,.12)}
+/* ── MULTI-SCENE SEQUENCE ── */
+.sc-seq-wrap{margin-top:10px;border:1px solid rgba(139,92,246,.2);border-radius:8px;overflow:hidden}
+.sc-seq-hd{display:flex;align-items:center;gap:8px;padding:7px 12px;background:rgba(139,92,246,.1)}
+.sc-seq-badge{font-size:9px;font-weight:800;color:var(--purple);letter-spacing:.8px}
+.sc-seq-total{font-size:9px;color:rgba(196,181,253,.5);margin-left:auto}
+.sc-seq-item{border-top:1px solid rgba(139,92,246,.15);padding:10px 12px}
+.sc-seq-item:first-child{border-top:none}
+.sc-seq-meta{display:flex;align-items:center;gap:7px;margin-bottom:6px}
+.sc-seq-label{font-size:9px;font-weight:800;background:rgba(139,92,246,.2);color:#c4b5fd;border-radius:3px;padding:1px 6px;letter-spacing:.5px}
+.sc-seq-role{font-size:10px;font-weight:700;color:var(--gold)}
+.sc-seq-dur{font-size:10px;color:var(--t3);background:var(--s3);border-radius:3px;padding:1px 6px}
+.sc-seq-script{font-size:11px;color:var(--t2);line-height:1.65;background:var(--s1);border-radius:5px;padding:7px 10px;margin-bottom:6px;border-left:2px solid rgba(200,169,110,.35)}
+.sc-seq-prompt{font-size:10px;color:#c4b5fd;font-family:'Courier New',monospace;line-height:1.6;background:rgba(139,92,246,.06);border-radius:5px;padding:7px 10px;cursor:pointer;transition:all .12s;position:relative;word-break:break-word}
+.sc-seq-prompt:hover{background:rgba(139,92,246,.15);border-color:rgba(139,92,246,.5)}
+.sc-seq-copy-hint{font-size:8px;color:rgba(196,181,253,.4);float:right;margin-top:1px}
+/* ── REF SECTION ── */
+.ref-input-wrap{background:rgba(245,158,11,.05);border:1px solid rgba(245,158,11,.2);border-radius:7px;padding:10px 12px;margin-top:6px}
+.ref-out-section{background:rgba(245,158,11,.05);border:1px solid rgba(245,158,11,.2);border-radius:8px;padding:14px 16px;margin-top:14px}
+.ref-out-title{font-size:9px;font-weight:800;color:var(--amber);letter-spacing:1px;margin-bottom:8px}
+.ref-out-text{font-size:12px;color:var(--t2);line-height:1.75;white-space:pre-wrap}
+/* ── TREND MODAL ── */
+.trend-modal{position:fixed;inset:0;background:rgba(0,0,0,.8);z-index:600;display:none;align-items:center;justify-content:center;padding:16px}
+.trend-modal.active{display:flex}
+.trend-modal-box{background:var(--s1);border:1px solid var(--b2);border-radius:var(--r);width:100%;max-width:480px;padding:20px}
+.trend-modal-title{font-size:14px;font-weight:800;margin-bottom:14px;display:flex;align-items:center;justify-content:space-between}
+.trend-month-label{font-size:10px;font-weight:700;color:var(--gold);background:var(--gold-bg);border:1px solid rgba(200,169,110,.3);border-radius:3px;padding:2px 8px;display:inline-block;margin-bottom:8px}
+.trend-update-btn{background:var(--gold);color:#080808;border:none;border-radius:6px;padding:5px 12px;font-size:11px;font-weight:800;cursor:pointer;font-family:inherit;transition:opacity .12s}
+.trend-update-btn:hover{opacity:.85}
+/* ── DREAMINA OUTPUT ── */
+.dreamina-header-bar{background:rgba(139,92,246,.08);border:1px solid rgba(139,92,246,.25);border-radius:8px;padding:10px 14px;margin-bottom:16px;font-size:11px;color:#c4b5fd;line-height:1.6}
+.dreamina-scene{background:var(--s2);border:1px solid var(--b1);border-radius:10px;padding:16px;margin-bottom:12px}
+.dreamina-scene-header{display:flex;align-items:center;gap:8px;margin-bottom:12px;flex-wrap:wrap}
+.dreamina-scene-num{background:rgba(139,92,246,.15);color:var(--purple);border:1px solid rgba(139,92,246,.3);border-radius:4px;padding:2px 8px;font-size:10px;font-weight:800;letter-spacing:.8px}
+.dreamina-scene-role{font-size:11px;font-weight:700;color:var(--gold)}
+.dreamina-duration-badge{font-size:10px;color:var(--t3);background:var(--s3);border-radius:3px;padding:1px 7px}
+.dreamina-sub-label{font-size:9px;font-weight:800;color:var(--t3);letter-spacing:1.2px;text-transform:uppercase;margin-bottom:5px;margin-top:10px}
+.dreamina-subtitle-box{font-size:13px;color:var(--t1);line-height:1.85;background:var(--s1);border:1px solid var(--b1);border-radius:6px;padding:10px 12px;white-space:pre-wrap}
+.dreamina-prompt-box{font-size:11px;color:#c4b5fd;background:rgba(139,92,246,.07);border:1px solid rgba(139,92,246,.2);border-radius:6px;padding:10px 12px;font-family:'Courier New',monospace;line-height:1.7;cursor:pointer;transition:all .12s;position:relative}
+.dreamina-prompt-box:hover{border-color:rgba(139,92,246,.5);background:rgba(139,92,246,.12)}
+.dreamina-prompt-copy-hint{position:absolute;top:6px;right:8px;font-size:9px;color:rgba(196,181,253,.5)}
+.dreamina-camera-row{display:flex;align-items:center;gap:8px;margin-top:10px;padding-top:8px;border-top:1px solid var(--b1);font-size:10px;color:var(--t3)}
+.dreamina-total-bar{background:var(--s1);border:1px solid var(--b1);border-radius:8px;padding:12px 16px;margin-bottom:16px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.dreamina-workflow{background:var(--s1);border:1px solid rgba(139,92,246,.25);border-radius:8px;padding:16px;margin-top:16px}
+.dreamina-workflow-title{font-size:11px;font-weight:800;color:var(--purple);letter-spacing:1px;margin-bottom:12px;text-transform:uppercase}
+.dreamina-workflow-step{display:flex;gap:10px;margin-bottom:10px;align-items:flex-start}
+.dreamina-workflow-step:last-child{margin-bottom:0}
+.dreamina-step-num{background:rgba(139,92,246,.15);color:var(--purple);border-radius:4px;padding:2px 7px;font-weight:800;font-size:10px;flex-shrink:0;white-space:nowrap}
+.dreamina-step-body{font-size:12px;color:var(--t2);line-height:1.6}
 </style>
 </head>
 <body>
@@ -753,6 +813,13 @@ input[type=range]{width:90px;accent-color:var(--gold);cursor:pointer;background:
       <input type="text" id="themeInput" placeholder="例：モテる男のファッション">
     </div>
 
+    <!-- Scene Setting -->
+    <div class="fg">
+      <label>撮影シーン・雰囲気 <span style="font-size:10px;color:var(--t3)">コンテンツタイプに合わせて自動更新</span></label>
+      <input type="text" id="sceneInput" placeholder="シーンを選択するか自由入力">
+      <div id="sceneChipsContainer" class="chips" style="margin-top:6px"></div>
+    </div>
+
     <!-- Suggest chips -->
     <div class="chips-wrap">
       <div class="chips-label">テンプレートから選ぶ</div>
@@ -761,8 +828,19 @@ input[type=range]{width:90px;accent-color:var(--gold);cursor:pointer;background:
 
     <!-- Trending keywords -->
     <div class="trend-section">
-      <div class="chips-label">🔥 2025年トレンドワード</div>
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
+        <span class="chips-label" id="trendSectionLabel">🔥 今月のトレンドワード</span>
+        <button class="trend-update-btn" onclick="openTrendModal()">更新</button>
+      </div>
       <div class="trend-tags" id="trendTags"></div>
+    </div>
+
+    <!-- Reference Input -->
+    <div class="fg" style="margin-top:14px">
+      <label>参考投稿・インスピレーション <span style="font-size:10px;color:var(--t3)">URLやフックをメモ</span></label>
+      <div class="ref-input-wrap">
+        <textarea id="refInput" placeholder="参考にしたいバズ投稿のフック、TikTok URL、取り入れたい表現など何でも…" style="min-height:56px;background:transparent;border:none;padding:0;font-size:12px;width:100%;resize:vertical"></textarea>
+      </div>
     </div>
 
     <!-- Genre -->
@@ -1371,6 +1449,142 @@ const CAROUSEL_SLIDES={
     {label:"最後のスライド（CTA）",text:`「刺さった」って思ったらフォローして\n\nこういう観察、毎週してます`,design:"共感CTAで保存・フォロー両方を狙う"},
   ],
 };
+
+// ─── TYPE-SPECIFIC SCENE TEMPLATES（日本語プロンプト） ───
+const TYPE_SCENES={
+  ranking:{
+    chips:[
+      {label:'🌆 都市ネオン',  jp:'東京の夜の街、暖かいネオンライト、シネマティックなブルーとオレンジのトーン、濡れた路面の反射、奥行きのあるボケ背景'},
+      {label:'🏙️ 高層ロビー', jp:'東京の高層ビルのガラス張りロビーまたは屋上、ドラマティックな建築照明、洗練されたモダンな雰囲気'},
+      {label:'☕ モダンカフェ', jp:'スタイリッシュなモダンカフェの内装、大理石のカウンター、スポットライト、エディトリアルな雰囲気'},
+      {label:'🚶 夜の路上',    jp:'東京の裏路地、夜、一本の街灯が照らす、長い影、シネマティックな孤独感'},
+      {label:'🪟 夕方窓際',    jp:'ゴールデンアワーの窓際、温かい斜め光、都会の景色が背景、ライフスタイルエディトリアル'},
+    ],
+    sequence:(char,base)=>[
+      {label:'SCENE A',dur:6, role:'イントロ',  prompt:`${char}、${base}、カメラを真っすぐ見つめる、ミディアムクローズアップ、冒頭のエネルギー、4Kシネマティック`},
+      {label:'SCENE B',dur:10,role:'ランク展開',prompt:`${char}、${base}、ライフスタイルBロール — 焦らないスマホ操作、リラックスした姿勢、自然な傾聴シーン、温かいシネマトーン、4K`},
+      {label:'SCENE C',dur:8, role:'ランク続き', prompt:`${char}、${base}、ミディアムからクローズアップへの切り替え、静かな社会的カリスマを表現、4Kシネマティック`},
+      {label:'SCENE D',dur:7, role:'まとめ強調', prompt:`${char}、${base}、スローなズームインのミディアムショット、決然とした表情、サイドからソフトなキーライト、4K`},
+    ],
+  },
+  bias:{
+    chips:[
+      {label:'🌃 夜の路地',   jp:'東京の路地裏、夜、フィルムノワール的な街灯の光、濡れた石畳の反射、深い影、ムーディな雰囲気'},
+      {label:'🌊 夕暮れ海',   jp:'人のいないビーチ、夕暮れ、広い水平線、柔らかなオレンジとピンクの空、内省的なシネマティックな雰囲気'},
+      {label:'📚 書斎',       jp:'薄暗い書斎、温かみのある電球色のデスクランプ、本棚が並ぶ背景、知的な雰囲気'},
+      {label:'🚂 夜行電車',   jp:'深夜の電車の車内、暖かい天井灯、反射する暗い窓、憂鬱なシネマティックな雰囲気'},
+      {label:'☔ 雨の窓',     jp:'夜、雨粒が流れる窓、ガラス越しにぼやけた街の灯り、親密な日本映画的雰囲気'},
+    ],
+    sequence:(char,base)=>[
+      {label:'SCENE A',dur:8, role:'世界観',    prompt:`${base}、ゆったりした雰囲気作りのエスタブリッシングショット、セリフなし、ムード設定、4Kシネマティック`},
+      {label:'SCENE B',dur:12,role:'大胆発言',  prompt:`${char}、${base}、カメラへの強い目線、情熱的なミディアムクローズアップ、ミュートなシネマティックカラーグレード、4K`},
+      {label:'SCENE C',dur:8, role:'象徴映像',  prompt:`象徴的な映像 — ガラスに当たるスローモーションの雨、一人歩く人物のシルエット、${base}、詩的でセリフなし、4K`},
+      {label:'SCENE D',dur:8, role:'確信の締め', prompt:`${char}、${base}、最後の落ち着いた眼差し、わずかな会心の微笑み、ゆっくりと引いていくミディアムショット、4K`},
+    ],
+  },
+  psych:{
+    chips:[
+      {label:'🔬 ホワイト背景', jp:'白いミニマルスタジオ、柔らかく拡散されたプロ照明、クリーンな教育的な雰囲気'},
+      {label:'💡 抽象光',       jp:'暗い背景に抽象的なボケ光のパーティクル、プリズムの屈折光、概念を表すビジュアルメタファー'},
+      {label:'🏛️ 美術館風',    jp:'モダンな美術館の廊下、真っ白な壁、ドラマティックなスポットライト、知的な雰囲気'},
+      {label:'🌀 幾何学影',     jp:'建築物の幾何学的な光と深い影のパターン、ミニマルな抽象空間、思考を刺激する映像'},
+      {label:'☕ 知的カフェ',   jp:'静かな洗練されたカフェ、朝の自然光、テーブルに開かれた本、知的なライフスタイル'},
+    ],
+    sequence:(char,base)=>[
+      {label:'SCENE A',dur:8, role:'概念紹介',  prompt:`${char}、${base}、カメラに向かって教育的に解説、はっきりとした自信のある語り、ミディアムショット、4K`},
+      {label:'SCENE B',dur:10,role:'抽象映像',  prompt:`抽象的な概念の可視化 — ボケ光のパーティクル、スローモーションの水の波紋または光の屈折、心理的なコンセプトを象徴する、ミニマルダーク背景、4K`},
+      {label:'SCENE C',dur:8, role:'実例映像',  prompt:`${char}、${base}、ライフスタイルの文脈でコンセプトを体現するシーン、観察的なミディアムからクローズアップ、自然な行動、4K`},
+      {label:'SCENE D',dur:6, role:'データ強調', prompt:`${char}、${base}、静かな権威を持つクローズアップ、データ引用の瞬間、クリーンなプロ照明、4K`},
+    ],
+  },
+  obs:{
+    chips:[
+      {label:'🌅 ゴールデンアワー',jp:'ゴールデンアワーの都市公園、木漏れ日、キャンディッドなストリート写真的な美学'},
+      {label:'🏙️ 繁華街観察',    jp:'東京の交差点、ドキュメンタリー的な手持ちカメラスタイル、動く人々のモーションブラー、観察的な雰囲気'},
+      {label:'🌸 静かな公園',     jp:'都市公園の静かな一角、木漏れ日、ベンチ、内省的で穏やかな雰囲気'},
+      {label:'🚶 商店街',         jp:'日本の商店街、暖かい午後の光、本物の下町の雰囲気、日常生活の観察'},
+      {label:'🌙 夜の公園',       jp:'夜の公園のベンチ、一本の街灯、静かで内省的な雰囲気、個人的な日記のような空気感'},
+    ],
+    sequence:(char,base)=>[
+      {label:'SCENE A',dur:10,role:'観察シーン', prompt:`キャンディッドスタイルの観察映像、${base}、手持ちドキュメンタリー的な美学、環境の自然な動き、温かみのあるオーガニックなトーン、4K`},
+      {label:'SCENE B',dur:8, role:'歩きシーン', prompt:`${char}、${base}、ゆったりとしたサイドトラッキングショット、焦らず内省的に歩く、ゴールデンライト、4K`},
+      {label:'SCENE C',dur:10,role:'気づきの瞬間',prompt:`${char}、${base}、ふとした気づきの表情、ミディアムクローズアップ、わずかな本物の微笑み、自然で作らないエネルギー、温かい光、4K`},
+      {label:'SCENE D',dur:8, role:'振り返り語り',prompt:`${char}、${base}、カメラへの直接的な振り返り、親密なストーリーテリングのトーン、ミディアムショット、柔らかなアンビエントライト、4K`},
+    ],
+  },
+  aru:{
+    chips:[
+      {label:'🛋️ リラックス部屋',jp:'居心地の良いリビングまたは寝室、温かいフェアリーライト、カジュアルでリラックスした雰囲気、共感できる日常の家'},
+      {label:'☕ 日常カフェ',    jp:'普段使いの近所のカフェ、温かい自然窓光、カジュアルで親しみやすい雰囲気'},
+      {label:'📱 スマホ操作',    jp:'スマートフォンを持つ手のクローズアップ、ニュートラルな暖かい背景、共感できるデジタルライフスタイルの瞬間'},
+      {label:'🏠 インドア生活',  jp:'ミニマルなアパートの内装、朝の柔らかい光、居心地の良い本物の日常生活'},
+      {label:'🌿 ナチュラル屋外',jp:'カジュアルな公園や庭、自然光、リラックスしたキャンディッドなライフスタイル写真'},
+    ],
+    sequence:(char,base)=>[
+      {label:'SCENE A',dur:6, role:'あるある①', prompt:`${char}、${base}、共感できる日常の瞬間 — カジュアルなスマホ操作やリラックスした様子、さりげない本物の微笑み、4K`},
+      {label:'SCENE B',dur:5, role:'あるある②', prompt:`${char}、${base}、2つ目の共感シーン、自然なリアクションショット、温かみのある本物の表情、4K`},
+      {label:'SCENE C',dur:5, role:'あるある③', prompt:`${char}、${base}、3つ目のあるある、「わかるわかる」という認識の表情、キャンディッドなエネルギー、温かいトーン、4K`},
+      {label:'SCENE D',dur:5, role:'あるある④', prompt:`${char}、${base}、穏やかで自然な社会的交流のシーン、4K`},
+      {label:'SCENE E',dur:6, role:'オチ・まとめ',prompt:`${char}、${base}、最後の「やっぱりね」な微笑みとカメラへの直接語りかけ、オチのエネルギー、ミディアムクローズアップ、4K`},
+    ],
+  },
+};
+
+// ─── MONTHLY TRENDS (月次トレンド) ───
+const MONTHLY_TRENDS_BASE=[
+  {m:0, モテ恋愛:['新年の出会い🔥','気持ちの整理','年明け告白','余裕のスタート🔥'],ファッション:['白コーデ🔥','冬ミニマル','シンプルニット'],マインド:['リセット🔥','目標設定','整える','自分軸🔥']},
+  {m:1, モテ恋愛:['バレンタイン🔥','本命vs義理','告白タイミング🔥','駆け引き'],ファッション:['春先取り🔥','ベージュ','暖色アイテム'],マインド:['大切な人への態度','静かな強さ🔥','自己肯定感']},
+  {m:2, モテ恋愛:['出会いの春🔥','印象を変える','新しい恋愛🔥','距離感'],ファッション:['春コーデ🔥','淡色','薄着の準備'],マインド:['変化を楽しむ🔥','余白','自分らしさ']},
+  {m:3, モテ恋愛:['新生活の出会い🔥','職場恋愛','初対面の印象🔥','好かれる話し方'],ファッション:['清潔感🔥','ミニマル春','白シャツ🔥'],マインド:['自己肯定感🔥','新しい自分','本物感']},
+  {m:4, モテ恋愛:['GW・デート🔥','連休中の距離感','好意の伝え方🔥'],ファッション:['薄着コーデ🔥','色気のある着こなし','カジュアル上品🔥'],マインド:['余裕のある男🔥','佇まい','所作']},
+  {m:5, モテ恋愛:['梅雨デート🔥','雨の日の会い方','モテる雰囲気🔥'],ファッション:['雨コーデ🔥','清潔感継続','骨格診断'],マインド:['感情の語彙力🔥','言語化','静かな強さ']},
+  {m:6, モテ恋愛:['夏の出会い🔥','花火・夏デート','焦らない夏恋愛🔥'],ファッション:['夏ミニマル🔥','白T着こなし','涼感コーデ🔥'],マインド:['自分軸🔥','嫉妬しない','余白の使い方']},
+  {m:7, モテ恋愛:['夏祭りデート🔥','浴衣の威力','お盆の恋愛🔥'],ファッション:['浴衣×現代🔥','夏終わりコーデ','リゾート感'],マインド:['自己効力感🔥','静かな自信','整える夏']},
+  {m:8, モテ恋愛:['夏の終わり恋愛🔥','秋の予感','そろそろ本気🔥'],ファッション:['秋先取り🔥','トレンチ','重ね着スタート'],マインド:['変化に強い人🔥','本物感','解像度が高い']},
+  {m:9, モテ恋愛:['秋の深まり🔥','夜デート','落ち着いた関係🔥'],ファッション:['秋コーデ🔥','暗色系','重ね着完成'],マインド:['余裕🔥','佇まい','所作が美しい人🔥']},
+  {m:10,モテ恋愛:['冬の予感🔥','温度差の恋愛','体の距離感🔥'],ファッション:['ニット🔥','秋冬移行','アウター選び🔥'],マインド:['感謝できる男🔥','言語化','静かな力']},
+  {m:11,モテ恋愛:['クリスマス🔥','年末デート','告白ラストチャンス🔥'],ファッション:['冬コーデ🔥','クリスマス映え','ダークトーン🔥'],マインド:['一年の締め🔥','自分軸','来年の自分']},
+];
+
+function getCurrentMonthTrends(){
+  const saved=localStorage.getItem('moteCustomTrends');
+  if(saved){try{return JSON.parse(saved);}catch{}}
+  const m=new Date().getMonth();
+  return MONTHLY_TRENDS_BASE[m]||MONTHLY_TRENDS_BASE[0];
+}
+
+function openTrendModal(){
+  const d=getCurrentMonthTrends();
+  const monthNames=['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'];
+  const m=new Date().getMonth();
+  document.getElementById('trendModalMonthLabel').textContent=`${monthNames[m]} のトレンド`;
+  document.getElementById('trendInputMote').value=(d['モテ恋愛']||[]).join(', ');
+  document.getElementById('trendInputFashion').value=(d['ファッション']||[]).join(', ');
+  document.getElementById('trendInputMind').value=(d['マインド']||[]).join(', ');
+  document.getElementById('trendModal').classList.add('active');
+}
+
+function closeTrendModal(){
+  document.getElementById('trendModal').classList.remove('active');
+}
+
+function saveTrends(){
+  const parse=s=>s.split(/[,、\n]/).map(x=>x.trim()).filter(Boolean);
+  const d={
+    モテ恋愛:parse(document.getElementById('trendInputMote').value),
+    ファッション:parse(document.getElementById('trendInputFashion').value),
+    マインド:parse(document.getElementById('trendInputMind').value),
+  };
+  localStorage.setItem('moteCustomTrends',JSON.stringify(d));
+  closeTrendModal();
+  updateTrends();
+}
+
+function resetTrends(){
+  localStorage.removeItem('moteCustomTrends');
+  closeTrendModal();
+  updateTrends();
+}
 
 const TRENDING = {
   モテ・恋愛:["余裕🔥","佇まい","色気","所作","自分軸","清潔感🔥"],
@@ -2174,10 +2388,34 @@ function selectTone(btn){
   currentTone=btn.dataset.tone;
 }
 function selectType(btn){
-  document.querySelectorAll('.type-btn').forEach(b=>b.classList.remove('active'));
+  var btns=document.querySelectorAll('.type-btn');
+  for(var i=0;i<btns.length;i++) btns[i].classList.remove('active');
   btn.classList.add('active');
   currentType=btn.dataset.type;
   updateChips();
+  renderSceneChips();
+}
+
+// sceneChips data store
+var _sceneChipsData=[];
+
+function renderSceneChips(){
+  var el=document.getElementById('sceneChipsContainer');
+  if(!el)return;
+  var typeData=TYPE_SCENES[currentType]||TYPE_SCENES.ranking;
+  var chips=typeData.chips||[];
+  _sceneChipsData=chips;
+  var html='';
+  for(var i=0;i<chips.length;i++){
+    html+='<span class="scene-chip" onclick="setSceneChipByIndex('+i+')">'+chips[i].label+'</span>';
+  }
+  el.innerHTML=html;
+}
+
+function setSceneChipByIndex(i){
+  var s=_sceneChipsData[i];
+  if(!s)return;
+  setSceneChip(s.label,s.jp||s.en||s.label);
 }
 function applyTone(text){
   if(!text||currentTone==='tame') return text;
@@ -2192,13 +2430,28 @@ function applyTone(text){
 }
 function updateChips(){
   const c=document.getElementById('chips');
-  c.innerHTML=(SUGGESTS[currentType]||[]).map(s=>`<span class="chip" onclick="document.getElementById('themeInput').value='${s}'">${s}</span>`).join('');
+  if(c) c.innerHTML=(SUGGESTS[currentType]||[]).map(s=>`<span class="chip" onclick="document.getElementById('themeInput').value='${s}'">${s}</span>`).join('');
   updateTrends();
 }
 function updateTrends(){
   const genre=document.getElementById('genreSelect')?.value||'モテ・恋愛';
-  const tags=TRENDING[genre]||TRENDING['モテ・恋愛'];
-  document.getElementById('trendTags').innerHTML=tags.map(t=>{
+  const d=getCurrentMonthTrends();
+  const monthNames=['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'];
+  const m=new Date().getMonth();
+  const lbl=document.getElementById('trendSectionLabel');
+  if(lbl)lbl.textContent=`🔥 ${monthNames[m]}のトレンドワード`;
+
+  // Pick tags based on genre
+  let tags;
+  if(genre==='ファッション'||genre==='美容・垢抜け') tags=d['ファッション']||[];
+  else if(genre==='心理学'||genre==='ライフスタイル'||genre==='人間観察') tags=d['マインド']||[];
+  else tags=d['モテ恋愛']||[];
+
+  // Merge with a few マインド words for variety
+  const mind=d['マインド']||[];
+  const merged=[...new Set([...tags,...mind.slice(0,2)])].slice(0,8);
+
+  document.getElementById('trendTags').innerHTML=merged.map(t=>{
     const hot=t.includes('🔥');
     const word=t.replace('🔥','');
     return `<span class="trend-tag" onclick="appendTrend('${word}')">${word}${hot?'<sup class="trend-hot">HOT</sup>':''}</span>`;
@@ -2221,8 +2474,65 @@ document.getElementById('lenSlider').addEventListener('input',function(){
 document.getElementById('genreSelect').addEventListener('change',updateTrends);
 
 // ═══════════════════════════════════════════════════
-//  GENERATE
+//  GENERATE + DREAMINA PROMPTS (全セクション統合)
 // ═══════════════════════════════════════════════════
+let _currentSceneEn=''; // English scene prompt currently selected
+
+function setSceneChip(label,enVal){
+  document.getElementById('sceneInput').value=label;
+  _currentSceneEn=enVal||'';
+  // Update active state
+  document.querySelectorAll('.scene-chip').forEach(c=>{
+    c.classList.toggle('active',c.textContent.trim()===label.trim());
+  });
+}
+
+const SCENE_MAP={
+  '都市':'modern Tokyo street at night, ambient warm neon lighting, bokeh cityscape',
+  '夜景':'modern Tokyo street at night, ambient warm neon lighting, bokeh cityscape',
+  'カフェ':'cozy modern Japanese cafe, warm soft lighting, blurred patrons in background',
+  '部屋':'minimalist modern room, soft ambient light from window, clean white walls',
+  'ミニマル':'minimalist modern room, soft ambient light from window, clean white walls',
+  '屋外':'quiet urban park in golden hour, warm sunlight filtering through trees',
+  'ゴールデン':'quiet urban park in golden hour, warm sunlight filtering through trees',
+  '鏡':'elegant bathroom with large mirror, soft warm vanity lighting',
+  '身支度':'elegant bathroom with large mirror, soft warm vanity lighting',
+  'オフィス':'modern upscale office lobby, clean architectural lines, soft ambient light',
+};
+const DREAMINA_CHAR_DEF='20代後半のスタイリッシュな日本人男性、ミニマルなダークファッション、清潔感のある整った外見、余裕のある自信した立ち姿';
+
+function getSceneJp(sceneInput){
+  if(!sceneInput)return'ミニマルなモダン東京のアパート、ブルーアワーの柔らかい窓光';
+  // チップから選んだ場合は _currentSceneEn（実際はJP）を使う
+  const key=Object.keys(SCENE_MAP).find(k=>sceneInput.includes(k));
+  if(key)return SCENE_MAP[key]+'、シネマティック照明';
+  return sceneInput+'、シネマティック照明';
+}
+
+function buildDreaminaPrompts(theme,sceneInput){
+  const char=DREAMINA_CHAR_DEF;
+  const scene=_currentSceneEn||getSceneJp(sceneInput);
+  const tScenes=TYPE_SCENES[currentType]||TYPE_SCENES.ranking;
+  const mainScenes=tScenes.sequence(char,scene);
+  return{
+    hook:`${char}、${scene}、カメラを真っすぐ見つめる、ミディアムクローズアップ、シネマティックな浅い被写界深度、自信のある表情、4Kフォトリアリスティック`,
+    mainScenes,
+    psych:`${char}、${scene}、重要な洞察を思い出すような上向きの思索的な視線、知的な表情、リムライティング、クローズアップからミディアムへのトランジション、4Kシネマティック`,
+    close:`${char}、${scene}、カメラへの直接的な視線、落ち着いて決然とした表情、ゆっくりとプッシュインするミディアムショット、ダーク背景にソフトなキーライト、4K`,
+    cta:`${char}、${scene}、カメラに向けた温かく本物の笑顔、ミディアムクローズアップ、親しみやすい表情、わずかなレンズフレア、柔らかい照明、4K`,
+  };
+}
+
+function segmentMainText(mainText,count){
+  const lines=mainText.split('\n\n').filter(Boolean);
+  if(!lines.length)return Array(count).fill('');
+  const out=[];
+  const per=Math.ceil(lines.length/count);
+  for(let i=0;i<count;i++) out.push(lines.slice(i*per,(i+1)*per).join('\n\n'));
+  return out;
+}
+
+
 function generateScript(){
   const theme=document.getElementById('themeInput').value.trim();
   if(!theme){document.getElementById('themeInput').focus();return;}
@@ -2326,6 +2636,13 @@ function renderOutput(theme,genre,useHash){
   const platBadge=currentPlat==='tiktok'?'badge-tiktok':'badge-instagram';
   const tags=useHash?getHashtags(genre):[];
   const platTip=PLAT_TIPS[currentPlat];
+  const sceneInput=document.getElementById('sceneInput')?.value||'';
+  const refText=document.getElementById('refInput')?.value.trim()||'';
+  const dp=buildDreaminaPrompts(theme,sceneInput);
+
+  // Attach script text to each main scene
+  const mainSegs=segmentMainText(v.main,dp.mainScenes.length);
+  const mainScenesWithText=dp.mainScenes.map((s,i)=>({...s,scriptText:mainSegs[i]||''}));
 
   document.getElementById('outputPanel').innerHTML=`
     <div class="out-header">
@@ -2335,6 +2652,7 @@ function renderOutput(theme,genre,useHash){
         <span class="stat-chip">${chars}文字</span>
         <span class="stat-chip">約${sec}秒</span>
         <span class="stat-chip">#${genre}</span>
+        <span class="badge" style="background:rgba(139,92,246,.1);color:#c4b5fd;border:1px solid rgba(139,92,246,.25)">🤖 Dreamina</span>
       </div>
       <div class="out-actions">
         <button class="btn-sm" id="copyBtn" onclick="copyScript()">コピー</button>
@@ -2342,19 +2660,23 @@ function renderOutput(theme,genre,useHash){
       </div>
     </div>
     <div class="out-body">
-      <div style="font-size:11px;color:var(--t3);background:var(--s2);border-radius:6px;padding:8px 12px;margin-bottom:16px">💡 ${platTip}</div>
+      ${refText?`<div class="ref-out-section">
+        <div class="ref-out-title">📌 参考インスピレーション</div>
+        <div class="ref-out-text">${htmlEnc(refText)}</div>
+      </div>`:''}
+      <div style="font-size:11px;color:var(--t3);background:var(--s2);border-radius:6px;padding:8px 12px;margin-bottom:16px">💡 ${platTip} &nbsp;|&nbsp; 🤖 各Dreaminaプロンプトをクリックでコピー</div>
       <div class="var-tabs">
         ${[0,1,2].map(i=>`<button class="var-tab${i===currentVariant?' active':''}" onclick="switchVar(${i},'${esc(theme)}','${esc(genre)}',${useHash})">パターン ${i+1}</button>`).join('')}
       </div>
-      ${section('hook','HOOK','tag-h','0〜3秒',v.hook,TIPS.hook,null)}
+      ${section('hook','HOOK','tag-h','0〜3秒',v.hook,TIPS.hook,null,dp.hook)}
       <div class="sc-divider">▼</div>
-      ${section('main','MAIN','tag-m','3〜45秒',v.main,TIPS.main,null)}
+      ${section('main','MAIN','tag-m','3〜45秒',v.main,TIPS.main,null,mainScenesWithText)}
       <div class="sc-divider">▼</div>
-      ${section('psych','PSYCH','tag-p','45〜60秒',v.psych,TIPS.psych,v.source)}
+      ${section('psych','PSYCH','tag-p','45〜60秒',v.psych,TIPS.psych,v.source,dp.psych)}
       <div class="sc-divider">▼</div>
-      ${section('close','CLOSE','tag-c','60〜75秒',v.close,TIPS.close,null)}
+      ${section('close','CLOSE','tag-c','60〜75秒',v.close,TIPS.close,null,dp.close)}
       <div class="sc-divider">▼</div>
-      ${section('cta','CTA','tag-cta','75〜90秒',v.cta,TIPS.cta,null)}
+      ${section('cta','CTA','tag-cta','75〜90秒',v.cta,TIPS.cta,null,dp.cta)}
       ${useHash&&tags.length?hashSection(tags):''}
       ${thumbBGMSection(theme)}
       ${renderEditGuide()}
@@ -2377,7 +2699,59 @@ function renderOutput(theme,genre,useHash){
   }
 }
 
-function section(id,label,tagClass,time,content,tip,source){
+function renderDreaminaBlock(dp){
+  if(!dp)return'';
+  if(Array.isArray(dp)){
+    const totalDur=dp.reduce((s,x)=>s+(x.dur||0),0);
+    // Store prompts for copy-all (use a data attribute on wrapper)
+    const allPrompts=dp.map((s,i)=>`【${s.label} — ${s.role} ${s.dur}秒】\n${s.prompt}`).join('\n\n');
+    const allId='dpall_'+Math.random().toString(36).slice(2,7);
+    // Store in window for copy-all button
+    window['_dp_'+allId]=allPrompts;
+    return`<div class="sc-seq-wrap">
+      <div class="sc-seq-hd">
+        <span class="sc-seq-badge">🤖 Dreaminaシーン構成</span>
+        <span class="sc-seq-total">${dp.length}カット · 計${totalDur}秒</span>
+        <button class="btn-sm" style="margin-left:auto;font-size:10px;padding:3px 10px" onclick="copyAllScenes('${allId}')">まとめてコピー</button>
+      </div>
+      ${dp.map((s,i)=>`<div class="sc-seq-item">
+        <div class="sc-seq-meta">
+          <span class="sc-seq-label">${s.label}</span>
+          <span class="sc-seq-role">${s.role}</span>
+          <span class="sc-seq-dur">🕐 ${s.dur}秒</span>
+        </div>
+        ${s.scriptText?`<div class="sc-seq-script">${htmlEnc(s.scriptText)}</div>`:''}
+        <div class="sc-seq-prompt" onclick="copyText('${esc(s.prompt)}')" title="クリックでコピー">
+          <span class="sc-seq-copy-hint">コピー</span>
+          ${htmlEnc(s.prompt)}
+        </div>
+      </div>`).join('')}
+    </div>`;
+  }
+  return`<div class="sc-dreamina">
+    <div class="sc-dreamina-hd">
+      <span class="sc-dreamina-badge">🤖 Dreaminaプロンプト</span>
+      <span class="sc-dreamina-hint">クリックでコピー</span>
+    </div>
+    <div class="sc-dreamina-text" onclick="copyText('${esc(dp)}')" title="クリックでコピー">${htmlEnc(dp)}</div>
+  </div>`;
+}
+
+function copyAllScenes(id){
+  const text=window['_dp_'+id];
+  if(!text)return;
+  navigator.clipboard.writeText(text).then(()=>{
+    // brief visual feedback on the button
+    document.querySelectorAll('.sc-seq-hd .btn-sm').forEach(b=>{
+      if(b.onclick&&b.onclick.toString().includes(id)){
+        b.textContent='コピー済み ✓';b.classList.add('success');
+        setTimeout(()=>{b.textContent='まとめてコピー';b.classList.remove('success');},2000);
+      }
+    });
+  });
+}
+
+function section(id,label,tagClass,time,content,tip,source,dp){
   return `<div class="sc-section">
     <div class="sc-head">
       <span class="sc-tag ${tagClass}">${label}</span>
@@ -2386,6 +2760,7 @@ function section(id,label,tagClass,time,content,tip,source){
     <div class="sc-content">${htmlEnc(content)}</div>
     ${source?`<div class="sc-source">📊 ${source.stat} — ${source.source}</div>`:''}
     <div class="sc-tip">${tip}</div>
+    ${renderDreaminaBlock(dp)}
   </div>`;
 }
 function hashSection(tags){
@@ -3588,13 +3963,20 @@ function renderTodayBar(){
 // ═══════════════════════════════════════════════════
 //  INIT
 // ═══════════════════════════════════════════════════
-updateChips();
-// v2 init — runs after all new functions are defined (end of script)
-window.addEventListener('DOMContentLoaded',()=>{
+// 初期化
+function _initApp(){
+  updateChips();
+  renderSceneChips();
   if(typeof runMigration!=='undefined')runMigration();
   if(typeof renderTodayBar!=='undefined')renderTodayBar();
   if(typeof extractWinPatterns!=='undefined')extractWinPatterns();
-});
+}
+if(document.readyState==='loading'){
+  document.addEventListener('DOMContentLoaded',_initApp);
+}else{
+  // DOMContentLoaded がすでに発火済みの場合も対応
+  _initApp();
+}
 </script>
 
 <!-- ── POST DETAIL MODAL ── -->
@@ -3620,6 +4002,34 @@ window.addEventListener('DOMContentLoaded',()=>{
 </div>
 
 <!-- ── QUICK ADD ── -->
+<!-- Trend Update Modal -->
+<div class="trend-modal" id="trendModal">
+  <div class="trend-modal-box">
+    <div class="trend-modal-title">
+      <span>🔥 トレンドワードを更新</span>
+      <button class="modal-x" onclick="closeTrendModal()">×</button>
+    </div>
+    <div id="trendModalMonthLabel" class="trend-month-label"></div>
+    <p style="font-size:11px;color:var(--t3);margin-bottom:12px;line-height:1.7">今週TikTok/Instagramで見かけたキーワードをカンマ区切りで入力。<br>例：<span style="color:var(--gold)">静かな自信, 余白, 佇まい🔥, リセット</span></p>
+    <div class="fg">
+      <label>モテ・恋愛ジャンル</label>
+      <textarea id="trendInputMote" placeholder="余裕, 佇まい🔥, 自分軸, ..." style="min-height:50px"></textarea>
+    </div>
+    <div class="fg">
+      <label>ファッション・垢抜け</label>
+      <textarea id="trendInputFashion" placeholder="ミニマル🔥, 地味かわ, センス, ..." style="min-height:50px"></textarea>
+    </div>
+    <div class="fg">
+      <label>人間観察・マインド</label>
+      <textarea id="trendInputMind" placeholder="言語化🔥, 解像度, 本物感, ..." style="min-height:50px"></textarea>
+    </div>
+    <div style="display:flex;gap:8px;margin-top:8px">
+      <button class="btn-gen" onclick="saveTrends()" style="flex:1;padding:10px;font-size:13px">保存して反映</button>
+      <button class="btn-sm" onclick="resetTrends()">今月のデフォルトに戻す</button>
+    </div>
+  </div>
+</div>
+
 <button class="qa-btn" onclick="toggleQuickAdd()" title="クイック追加">＋</button>
 <div class="qa-panel" id="qaPanel">
   <div class="qa-item" onclick="qaAddNeta()"><span>💡</span>ネタを追加</div>
