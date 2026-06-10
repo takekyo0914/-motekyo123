@@ -1836,75 +1836,199 @@ const CLOSES={
 };
 
 // ── X / Threads ローカルテンプレート ──
+// ── X テンプレート（3バリアント × 5タイプ）──
+// バリアント: 0=断定・RT狙い / 1=共感・保存狙い / 2=問いかけ・リプ狙い
 const X_POSTS={
-  ranking:t=>({
-    short:`${t}——知らないと損するやつ。`,
-    sharp:`モテる人とそうじゃない人の差は「${t}」に全部詰まってる。`,
-    empathy:`「${t}」で悩んでる人って、実はここで躓いてることが多い。`,
-    list:`${t}\n\n5位：返信を焦らない\n4位：話しすぎない\n3位：褒めすぎない\n2位：焦りを見せない\n1位：SNSを見せすぎない`
-  }),
-  bias:t=>({
-    short:`${t}——これ、正直に言い切れる人が一番モテる。`,
-    sharp:`「${t}」って言えない人は、まだ恋愛で遠回りしてると思う。`,
-    empathy:`${t}、これ分かる人と分からない人で恋愛の結果が変わる気がする。`,
-    list:`${t}について本音だけ言います。\n\n・余裕がある人が勝つ\n・優しさより安定感\n・追わせた方が上手くいく\n・清潔感は才能じゃなくて習慣`
-  }),
-  psych:t=>({
-    short:`${t}——知ってる人と知らない人で恋愛の勝率が変わる。`,
-    sharp:`${t}って心理学で全部説明できる。モテる人は無意識にこれをやってる。`,
-    empathy:`「なんであの人はモテるんだろう」——答えは${t}にある。`,
-    list:`${t}まとめ\n\n・単純接触効果（見るほど好きになる）\n・希少性の原理（手に入りにくい＝価値高い）\n・返報性の法則（先に与えた方が有利）\n・ハロー効果（清潔感だけで全部良く見える）`
-  }),
-  obs:t=>({
-    short:`${t}——観察してたら全部分かった。`,
-    sharp:`雰囲気がある人の共通点、ずっと観察してたら気づいたことがある。${t}の話。`,
-    empathy:`${t}って、説明できないけど分かる人には分かるやつだと思う。`,
-    list:`雰囲気ある人の特徴\n\n・聞く側に回る\n・リアクションが落ち着いてる\n・誰にでも同じトーン\n・不機嫌を顔に出さない\n・ありがとうが自然に出る`
-  }),
-  aru:t=>({
-    short:`${t}のあるある、全部当てはまったら相当モテてると思う。`,
-    sharp:`モテる人あるある——${t}でまとめると全部「余裕」と「聞く力」に行き着く。`,
-    empathy:`${t}のあるある言います。「わかる」ってなったらフォローして。`,
-    list:`${t}あるある\n\n□ LINEの返信が絶妙に丁寧\n□ 話を引き出すのが上手い\n□ 褒め方がさりげない\n□ いつも安定してる\n□ ありがとうが自然に出る`
-  })
+  ranking:[
+    (t,tw)=>({angle:'断定・RT狙い',
+      short:`${t}——知らないと本当に損する。`,
+      sharp:`モテる人とそうじゃない人、差は「${t}」に全部詰まってる。一個ずつ潰せば変わる。`,
+      empathy:`「${t}」できてない人、絶対どこかで悩んでる。これ早く知りたかった。`,
+      list:`${t}\n\n5位：返信を焦らない\n4位：話しすぎない\n3位：褒めすぎない\n2位：焦りを見せない\n1位：SNSを見せすぎない`}),
+    (t,tw)=>({angle:'共感・保存狙い',
+      short:`${t}って、意外と自分もできてないやつ多い。`,
+      sharp:`${t}できてる自信ある人ってほとんどいないと思う。でもここを意識するだけで見え方が全然変わる。`,
+      empathy:`「分かってるけどできない」が一番つらいよね。${t}の話。`,
+      list:`${t}、できてる人の特徴\n\n・焦りを表に出さない\n・話すより聞く側に回る\n・褒め言葉をあえて惜しむ\n・SNSで全部見せない\n・不機嫌を顔に出さない`}),
+    (t,tw)=>({angle:'問いかけ・リプ狙い',
+      short:`${t}、一番難しいのどれだと思う？`,
+      sharp:`${t}で一番できてないやつ、正直に言える？自分は「返信を焦らない」が全然できてなかった。`,
+      empathy:`「${t}」5個中いくつ当てはまった？返信で教えて。`,
+      list:`${t} — 正直に○×つけてみて\n\n□ 返信を焦らない\n□ 話しすぎない\n□ 褒めすぎない\n□ 焦りを見せない\n□ SNSを見せすぎない\n\n何個○だった？`}),
+  ],
+  bias:[
+    (t,tw)=>({angle:'断定・RT狙い',
+      short:`${t}——これ言い切れる人が一番モテる。`,
+      sharp:`「${t}」正直に言えない人、まだ恋愛で遠回りしてると思う。知識じゃなくて覚悟の話。`,
+      empathy:`${t}、分かる人には分かる。でも大半の人はまだ気づいてない。`,
+      list:`${t}について本音だけ言う\n\n・余裕がある人が最強\n・優しさより安定感が刺さる\n・追わせた方が上手くいく\n・清潔感は才能じゃなくて習慣`}),
+    (t,tw)=>({angle:'共感・保存狙い',
+      short:`${t}、分かってても実践できないのが難しい。`,
+      sharp:`${t}ってずっと頭では分かってた。でも行動に落とし込めるまでに時間がかかった。`,
+      empathy:`「${t}」、頭で理解してても体が追いつかないやつ。一番しんどいタイプの真理。`,
+      list:`${t}を行動に変えるには\n\n・まず一つだけ選ぶ\n・三日間だけ試す\n・できたか振り返る\n・できてたら次に進む`}),
+    (t,tw)=>({angle:'問いかけ・リプ狙い',
+      short:`${t}、みんなはどう思う？`,
+      sharp:`${t}って偏見だと思う？それとも共感？どっちか返信で教えて。`,
+      empathy:`「${t}」に共感する人と反論したい人、どっちが多いか気になる。`,
+      list:`${t}\n\n賛成？反対？\n理由も含めて返信で教えて。\nどっちの意見も読みます。`}),
+  ],
+  psych:[
+    (t,tw)=>({angle:'教育・断言',
+      short:`${t}——モテる人は無意識にこれをやってる。`,
+      sharp:`${t}って心理学で全部説明できる。知った上でやると、知らずにやるより圧倒的に効果が出る。`,
+      empathy:`「なんであの人はモテるんだろう」——答えは${t}に全部ある。`,
+      list:`${t}まとめ\n\n・単純接触効果→見るほど好きになる\n・希少性の原理→希少＝価値が上がる\n・返報性の法則→先に与えた方が有利\n・ハロー効果→清潔感だけで全部良く見える`}),
+    (t,tw)=>({angle:'共感・保存狙い',
+      short:`${t}、知ってから恋愛の見え方が変わった。`,
+      sharp:`${t}を知る前と後では、同じ状況でも全然違う選択ができるようになった。知識って武器になる。`,
+      empathy:`「なんでこうなるんだろう」が減った。${t}を意識するようになってから。`,
+      list:`${t}を意識してから変わったこと\n\n・人の行動の理由が分かるようになった\n・余裕を持って動けるようになった\n・感情で動かなくなった\n・好かれ方が分かってきた`}),
+    (t,tw)=>({angle:'問いかけ・リプ狙い',
+      short:`${t}、実際に試した人いる？`,
+      sharp:`${t}、知識として知ってる人多いと思うけど、実際に意識して使ってる人ってどのくらいいるんだろう。`,
+      empathy:`${t}を学んで、実際に何か変わった経験ある？返信で教えて。`,
+      list:`${t}\n\n①知識として知ってた？\n②実際に試した？\n③何か変わった？\n\n返信で教えて`}),
+  ],
+  obs:[
+    (t,tw)=>({angle:'観察・断言',
+      short:`${t}——観察してたら全部分かった。`,
+      sharp:`雰囲気ある人の共通点、ずっと観察してた。全部「聞く力」と「余裕」に行き着く。${t}の話。`,
+      empathy:`${t}って、説明するのが難しいけど観察すると全員に共通点がある。`,
+      list:`雰囲気ある人の特徴\n\n・聞く側に自然に回る\n・リアクションが落ち着いてる\n・誰にでも同じトーン\n・不機嫌を顔に出さない\n・一緒にいると背筋が伸びる`}),
+    (t,tw)=>({angle:'共感・保存狙い',
+      short:`${t}、意識してる人と無意識の人で全然違う。`,
+      sharp:`${t}、無意識にできてる人がいる一方で、意識しても難しい人もいる。差はどこにあるんだろうってずっと考えてた。`,
+      empathy:`${t}って「やろう」と思ってできるものじゃないんだよな。でも意識するだけで確実に変わる。`,
+      list:`${t}を習慣にするコツ\n\n・話しかけられたら聞く側に徹する\n・リアクションは一テンポ置く\n・誰の前でも同じ自分でいる\n・不機嫌はその場に持ち込まない`}),
+    (t,tw)=>({angle:'問いかけ・リプ狙い',
+      short:`${t}、あなたの周りで一番「雰囲気あるな」って人はどんな人？`,
+      sharp:`${t}について観察してた話をしたいんだけど、まずみんなに聞きたい。`,
+      empathy:`${t}、自分はできてると思う？返信で正直に教えて。`,
+      list:`${t}について聞かせて\n\n・周りで雰囲気ある人いる？\n・その人の共通点は何？\n・自分もそうなりたいと思う？`}),
+  ],
+  aru:[
+    (t,tw)=>({angle:'断定・共感',
+      short:`${t}のあるある、全部当てはまったら相当モテてる。`,
+      sharp:`モテる人あるある——${t}でまとめると全部「余裕」と「聞く力」に集約される。`,
+      empathy:`${t}のあるある言います。「わかる」ってなったらフォローして。`,
+      list:`${t}あるある\n\n□ LINEの返信が絶妙に丁寧\n□ 話を引き出すのが自然\n□ 褒め方がさりげない\n□ いつも安定してる\n□ ありがとうが本音で出る`}),
+    (t,tw)=>({angle:'共感・保存狙い',
+      short:`${t}のあるある、できてることとできてないこと、どっちが多い？`,
+      sharp:`${t}のあるある書いてたら自分のこともかなり当てはまってた。できてるとこと、まだまだなとこが両方見えた。`,
+      empathy:`${t}のあるある——全部「習慣」なんだよな。才能じゃなくて繰り返してきたことの話。`,
+      list:`${t}あるある（自己診断）\n\n□ LINEの返信が丁寧 ○×\n□ 話を引き出せる ○×\n□ 褒め方が自然 ○×\n□ 感情が安定してる ○×\n□ 感謝が本音で出る ○×`}),
+    (t,tw)=>({angle:'問いかけ・リプ狙い',
+      short:`${t}のあるある、いくつ当てはまった？`,
+      sharp:`${t}のあるある5個、自分は○×つけたら3個だった。みんなはどうだった？`,
+      empathy:`${t}のあるある——一番「当てはまってない」やつ何番だった？返信で教えて。`,
+      list:`${t}あるある○×チェック\n\n□ LINEの返信が丁寧\n□ 話を引き出せる\n□ 褒め方が自然\n□ 感情が安定してる\n□ ありがとうが本音で出る\n\n何個○だった？コメントで↓`}),
+  ],
 };
 
+// ── Threads テンプレート（3バリアント × 5タイプ）──
+// バリアント: 0=本音・リプ誘発 / 1=観察・フォロー誘発 / 2=コミュニティ・会話誘発
 const THREADS_POSTS={
-  ranking:t=>({
-    honest:`${t}って、最近やっと言語化できてきた気がする。`,
-    question:`${t}、みんなはどの順位が一番「わかる」ってなった？`,
-    conversation:`${t}の話を友達にしたら「それ全部俺のことじゃん」って言われた。あるあるすぎて笑えなかった。`,
-    empathy:`${t}って、知識じゃなくて習慣の話なんだよね。分かってるのにできない、が一番つらい。`,
-    closing:`結局、${t}って「余裕を持てるか」だけな気がしてる。`
-  }),
-  bias:t=>({
-    honest:`これ偏見なんですけど、${t}って本当にそうだと思う。反論あればどうぞ。`,
-    question:`${t}——これ、みんなはどう思う？自分もそうだと思う？`,
-    conversation:`友達に「${t}って本当だと思う？」って聞いたら「お前が言うな」って返ってきた。`,
-    empathy:`${t}、分かってても実践できないのが難しいんだよな。`,
-    closing:`${t}、一言で言うなら「自分を信じてる人が最強」ってことだと思う。`
-  }),
-  psych:t=>({
-    honest:`${t}って最初聞いたとき「そんなわけ」ってなったけど、試したらマジだった。`,
-    question:`${t}って聞いて、すぐ使ってみたい場面が浮かんだ人いる？`,
-    conversation:`${t}の話、知人にしたら「それ説明できるの怖い」って言われた。知識って使い方次第だよね。`,
-    empathy:`${t}、これ知ってると恋愛の「なんでこうなるんだろう」がかなり減る。`,
-    closing:`${t}——知ることより、忘れずに使い続けることの方が100倍難しい。`
-  }),
-  obs:t=>({
-    honest:`${t}、観察してると本当によく分かる。自分がどう見られてるかも含めて。`,
-    question:`${t}って、意識してる？それとも自然にそうなってる？`,
-    conversation:`${t}の話を職場の人にしたら「それ私のことだ」って笑ってた。気づいてなかったらしい。`,
-    empathy:`${t}って言葉にするのが難しいんだけど、なんか分かる気がする人いると思う。`,
-    closing:`${t}——雰囲気って作るもんじゃなくて、気づいたらそうなってるもんだと思う。`
-  }),
-  aru:t=>({
-    honest:`${t}のあるある書いてたら自分のことも全部当てはまってて笑えなかった。`,
-    question:`${t}のあるある、いくつ当てはまった？5個以上だったら相当モテると思う。`,
-    conversation:`${t}のあるあるを友達に送ったら「これ全部お前じゃん」って返ってきた。`,
-    empathy:`${t}のあるある——「分かる」ってなった瞬間、何かが繋がる感じがする。`,
-    closing:`${t}のあるある、全部「習慣」に行き着くんだよね。才能じゃなくて。`
-  })
+  ranking:[
+    (t,tw)=>({angle:'本音・リプ誘発',
+      honest:`${t}って、最近やっと自分でも腑に落ちてきた。知識として知ってた時期と、腑に落ちた時期は全然違う。`,
+      question:`${t}、みんなはどの順位が一番「わかる」ってなった？`,
+      conversation:`${t}の話を友達にしたら「それ全部俺のことじゃん」って言われた。あるあるすぎて笑えなかった。`,
+      empathy:`${t}って、知識じゃなくて習慣の話なんだよね。分かってるのにできない、が一番つらい。`,
+      closing:`結局、${t}って「余裕を持てるか」だけだと思ってる。`}),
+    (t,tw)=>({angle:'観察・フォロー誘発',
+      honest:`${t}について観察してきた話を書きます。`,
+      question:`できる人とできない人でなぜ差が出るのかをずっと考えてた。`,
+      conversation:`${t}のうち、一番差が出るのって「返信を焦らない」だと思う。焦りは全部言動に出る。`,
+      empathy:`モテる人って特別なことしてるわけじゃなくて、当たり前のことを当たり前にできてる人が多い。${t}って全部そういう話。`,
+      closing:`${tw?`「${tw.replace('🔥','')}」が注目される今、${t}の重要性がさらに増してる気がする。`:`${t}、今から始めても全然遅くないと思う。`}`}),
+    (t,tw)=>({angle:'コミュニティ・会話誘発',
+      honest:`${t}について、正直に思うことを書く。`,
+      question:`${t}、みんなが一番「できてない」と感じるのって何番？`,
+      conversation:`コメントで教えてほしいんだけど、${t}のうち、一番最初に意識し始めたのってどれ？`,
+      empathy:`「分かってるのに直せない」と「そもそも気づいてなかった」は全然違う問題だよね。${t}ってまさにそれ。`,
+      closing:`あなたの経験も聞かせて。コメントで。`}),
+  ],
+  bias:[
+    (t,tw)=>({angle:'本音・リプ誘発',
+      honest:`これ偏見100%で言うけど、${t}って本当にそうだと思う。`,
+      question:`${t}——みんなはどう思う？共感？反論？`,
+      conversation:`友達に「${t}って本当だと思う？」って聞いたら「お前が言うな」って返ってきた。`,
+      empathy:`${t}、分かってても実践できないのが難しいんだよな。`,
+      closing:`${t}、一言で言うなら「自分を信じてる人が最強」ってことだと思う。`}),
+    (t,tw)=>({angle:'観察・フォロー誘発',
+      honest:`${t}って、観察してると本当によく分かる。`,
+      question:`モテる人って何が違うのかをずっと観察してた。答えは意外とシンプルだった。`,
+      conversation:`${t}、できてる人って「努力してます」感が全然ない。自然にそうなってる。`,
+      empathy:`知識として知ってるのと、身についてるのは全然違う。${t}ってその典型例。`,
+      closing:`${tw?`「${tw.replace('🔥','')}」が重視される時代、${t}ってますます大事になってると思う。`:`${t}、今日から一個だけ意識してみて。`}`}),
+    (t,tw)=>({angle:'コミュニティ・会話誘発',
+      honest:`${t}について、みんなの意見が聞きたい。`,
+      question:`これって偏見だと思う？それとも「わかる」ってなる？`,
+      conversation:`${t}に対して「共感派」と「反論派」でコメント欄分かれそう。どっちか教えて。`,
+      empathy:`こういう話って、人によって全然反応が違うから面白い。${t}ってみんなどう感じるんだろう。`,
+      closing:`コメントで正直に教えてください。どっちの意見も読みます。`}),
+  ],
+  psych:[
+    (t,tw)=>({angle:'本音・リプ誘発',
+      honest:`${t}って最初聞いたとき「そんなわけ」ってなったけど、実際に試したらマジだった。`,
+      question:`${t}って聞いて、すぐ使ってみたい場面が浮かんだ人いる？`,
+      conversation:`${t}の話を友人にしたら「それ説明できるの怖い」って言われた。知識って使い方次第だよね。`,
+      empathy:`${t}、これ知ってると恋愛の「なんでこうなるんだろう」がかなり減る。`,
+      closing:`${t}——知ることより、忘れずに使い続けることの方が100倍難しい。`}),
+    (t,tw)=>({angle:'観察・フォロー誘発',
+      honest:`${t}を意識し始めてから、人の行動を見る目が変わった。`,
+      question:`モテる人って意識してやってるのか、無意識なのか。ずっと気になってた。`,
+      conversation:`${t}、意識してる人は確かに恋愛がうまくいってることが多い。これって相関なのか因果なのか。`,
+      empathy:`知識として持ってるだけで、行動が変わる。${t}ってそういう種類の知識だと思う。`,
+      closing:`${tw?`「${tw.replace('🔥','')}」が話題になる中で、${t}への注目がさらに高まってる気がする。`:`${t}、今日から一個だけ試してみて。`}`}),
+    (t,tw)=>({angle:'コミュニティ・会話誘発',
+      honest:`${t}について、みんなに聞いてみたい。`,
+      question:`知識として知ってる人と、実際に使ってる人、どっちが多いんだろう。`,
+      conversation:`${t}を実際の恋愛で使って何か変わった経験がある人、コメントで教えてほしい。`,
+      empathy:`こういう心理学の知識、知ってる人が増えてる割に実践してる人が少ない気がする。なぜ？`,
+      closing:`コメントで教えてください。実体験の話が一番参考になるから。`}),
+  ],
+  obs:[
+    (t,tw)=>({angle:'本音・リプ誘発',
+      honest:`${t}、観察してると本当によく分かる。自分がどう見られてるかも含めて。`,
+      question:`${t}って、意識してる？それとも自然にそうなってる？`,
+      conversation:`${t}の話を職場の人にしたら「それ私のことだ」って笑ってた。気づいてなかったらしい。`,
+      empathy:`${t}って言葉にするのが難しいんだけど、なんか分かる気がする人いると思う。`,
+      closing:`${t}——雰囲気って作るもんじゃなくて、気づいたらそうなってるもんだと思う。`}),
+    (t,tw)=>({angle:'観察・フォロー誘発',
+      honest:`${t}、ずっと観察してたら面白いことに気づいた。`,
+      question:`雰囲気がある人って、共通して何かを「しない」んだよね。`,
+      conversation:`${t}について観察してたら、「聞く力」と「余裕」が全ての根本にあることが分かってきた。`,
+      empathy:`雰囲気って後天的に作れるものだと思う。才能じゃなくて習慣の話。${t}ってまさにそれ。`,
+      closing:`${tw?`「${tw.replace('🔥','')}」が重視される今、${t}への解像度が上がると強いと思う。`:`${t}、意識するだけでも見え方が変わってくる。`}`}),
+    (t,tw)=>({angle:'コミュニティ・会話誘発',
+      honest:`${t}、みんなの経験が聞きたい。`,
+      question:`あなたの周りで「この人、雰囲気あるな」って思う人はどんな特徴がある？`,
+      conversation:`${t}って、自分ではできてると思っても他人から見ると全然違うことがある。コメントで教えて。`,
+      empathy:`こういう話、答えが一つじゃないから面白い。${t}についてどう思う？`,
+      closing:`あなたが思う「雰囲気のある人の特徴」をコメントで教えてください。`}),
+  ],
+  aru:[
+    (t,tw)=>({angle:'本音・リプ誘発',
+      honest:`${t}のあるある書いてたら自分のことも全部当てはまってて笑えなかった。`,
+      question:`${t}のあるある、いくつ当てはまった？5個以上だったら相当モテてると思う。`,
+      conversation:`${t}のあるあるを友達に送ったら「これ全部お前じゃん」って返ってきた。`,
+      empathy:`${t}のあるある——「分かる」ってなった瞬間、何かが繋がる感じがする。`,
+      closing:`${t}のあるある、全部「習慣」に行き着くんだよね。才能じゃなくて。`}),
+    (t,tw)=>({angle:'観察・フォロー誘発',
+      honest:`モテる人のあるあるをずっと観察してた話をします。`,
+      question:`共通点は思ってたより地味なことが多かった。`,
+      conversation:`${t}のあるある、全部「大きなこと」じゃないんだよね。LINEの返し方とか、褒め方のさりげなさとか、小さいことの積み重ね。`,
+      empathy:`才能とか顔の話じゃなくて、習慣の話だって分かってから気持ちが楽になった。${t}ってそういう話。`,
+      closing:`${tw?`「${tw.replace('🔥','')}」が注目される今、${t}への理解が一つの強みになってると思う。`:`${t}のあるある、意識するだけで結構変わるよ。`}`}),
+    (t,tw)=>({angle:'コミュニティ・会話誘発',
+      honest:`${t}のあるある、みんなに聞いてみたい。`,
+      question:`一番「当てはまってない」やつ、何番だった？正直に教えて。`,
+      conversation:`${t}のあるあるチェック、コメントで結果教えて。何個○だったか気になる。`,
+      empathy:`できてる人から見ると「え、それ普通じゃないの？」ってなるやつ、${t}には多い気がする。`,
+      closing:`コメントで何個○だったか教えてください。みんなの結果みたい。`}),
+  ],
 };
 
 const CTAS={
@@ -2836,72 +2960,130 @@ const PLAT_TIPS={
   threads:"Threads向き：少しやわらかく、余白を残す。会話が起きやすい終わり方にする。",
 };
 
+let _xVar=0, _thVar=0;
+
+function _getTrendWord(){
+  try{
+    const genre=document.getElementById('genreSelect')?.value||'モテ・恋愛';
+    const d=getCurrentMonthTrends();
+    let words;
+    if(genre.includes('ファッション')||genre.includes('美容'))words=d['ファッション']||[];
+    else if(genre.includes('心理')||genre.includes('ライフ')||genre.includes('人間'))words=d['マインド']||[];
+    else words=d['モテ恋愛']||[];
+    const hot=words.filter(w=>w.includes('🔥'));
+    const pick=hot.length?hot:words;
+    return pick[Math.floor(Math.random()*pick.length)]||'';
+  }catch(e){return'';}
+}
+
+function _getStatLine(theme){
+  const key=Object.keys(STATS).find(k=>theme.includes(k));
+  if(!key)return'';
+  return`${STATS[key].stat}（${STATS[key].source}）`;
+}
+
+function _getXCTA(){
+  const v=document.getElementById('ctaSelect')?.value||'follow';
+  return{line:'フォローで毎週こういう話します。概要欄のLINEへ↓',follow:'フォローすると毎週こういう話が届きます。',note:'詳しくはプロフのnoteへ。',comment:'これ思い当たった人、返信で教えて。'}[v]||'';
+}
+
+function _getThCTA(){
+  const v=document.getElementById('ctaSelect')?.value||'follow';
+  return{line:'フォローで週4こういう話します。LINE詳細はプロフから。',follow:'フォローすると毎週こういう話が届きます。',note:'続きはnoteに書いてます。プロフリンクから。',comment:'あなたはどう思う？コメントで教えて。'}[v]||'';
+}
+
 function _genXPost(theme){
+  _xVar=0;
   const btn=document.getElementById('genBtn');
   btn.disabled=true;btn.textContent='生成中...';
-  setTimeout(()=>{
-    const fn=X_POSTS[currentType]||X_POSTS.ranking;
-    const p=fn(theme);
-    const useHash=document.getElementById('hashToggle').checked;
-    const tags=useHash?getHashtags(document.getElementById('genreSelect').value):[];
-    document.getElementById('outputPanel').innerHTML=`
-    <div class="out-header">
-      <div class="out-meta">
-        <span class="badge badge-x">𝕏 X</span>
-        <span class="badge ${TYPE_BADGES[currentType]||'badge-rank'}">${TYPE_LABELS[currentType]||''}</span>
-      </div>
-      <div class="out-actions"><button class="btn-sm" onclick="generateScript()">再生成</button></div>
+  setTimeout(()=>{ _renderXOutput(theme); btn.disabled=false;btn.textContent='台本を生成する'; },300);
+}
+
+function switchXVar(v,theme){ _xVar=v; _renderXOutput(theme); }
+
+function _renderXOutput(theme){
+  const variants=X_POSTS[currentType]||X_POSTS.ranking;
+  const tw=_getTrendWord();
+  const p=variants[_xVar]?variants[_xVar](theme,tw):variants[0](theme,tw);
+  const useHash=document.getElementById('hashToggle').checked;
+  const useStats=document.getElementById('statsToggle').checked;
+  const tags=useHash?getHashtags(document.getElementById('genreSelect').value):[];
+  const cta=_getXCTA();
+  const stat=useStats?_getStatLine(theme):'';
+  const varLabels=['断定','共感','問いかけ'];
+  document.getElementById('outputPanel').innerHTML=`
+  <div class="out-header">
+    <div class="out-meta">
+      <span class="badge badge-x">𝕏 X</span>
+      <span class="badge ${TYPE_BADGES[currentType]||'badge-rank'}">${TYPE_LABELS[currentType]||''}</span>
+      <span class="stat-chip">${htmlEnc(p.angle)}</span>
     </div>
-    <div class="out-body">
-      <div style="font-size:11px;color:var(--t3);background:var(--s2);border-radius:6px;padding:8px 12px;margin-bottom:14px">💡 ${PLAT_TIPS.x}</div>
-      ${_xCard('短め（80字）',p.short)}
-      ${_xCard('鋭め（120字）',p.sharp)}
-      ${_xCard('共感版',p.empathy)}
-      ${_xCard('箇条書き版',p.list)}
-      ${useHash&&tags.length?`<div class="hash-section"><div class="hash-title"># ハッシュタグ</div><div class="hash-tags">${tags.map(t=>`<span class="hash-tag">#${htmlEnc(t)}</span>`).join('')}</div></div>`:''}
-    </div>`;
-    btn.disabled=false;btn.textContent='台本を生成する';
-  },300);
+    <div class="out-actions"><button class="btn-sm" onclick="_genXPost('${esc(theme)}')">再生成</button></div>
+  </div>
+  <div class="out-body">
+    <div style="font-size:11px;color:var(--t3);background:var(--s2);border-radius:6px;padding:8px 12px;margin-bottom:14px">💡 ${PLAT_TIPS.x}</div>
+    <div class="var-tabs">${variants.map((_,i)=>`<button class="var-tab${i===_xVar?' active':''}" onclick="switchXVar(${i},'${esc(theme)}')">${varLabels[i]||'パターン'+(i+1)}</button>`).join('')}</div>
+    ${_xCard('🎯 短め（80字目安）',applyTone(p.short))}
+    ${_xCard('🔥 鋭め（120字目安）',applyTone(p.sharp))}
+    ${_xCard('💭 共感版',applyTone(p.empathy))}
+    ${_xCard('📋 箇条書き版',applyTone(p.list))}
+    ${stat?`<div style="font-size:11px;color:var(--t3);background:var(--s2);border:1px solid var(--b1);border-radius:6px;padding:8px 12px;margin:4px 0 10px">📊 ${htmlEnc(stat)}</div>`:''}
+    ${cta?`<div style="margin-bottom:10px"><div class="cof-label">CTA</div><div class="cof-text" style="font-size:12px" onclick="copyText('${esc(cta)}')">${htmlEnc(cta)}</div></div>`:''}
+    ${useHash&&tags.length?`<div class="hash-section"><div class="hash-title"># ハッシュタグ</div><div class="hash-tags">${tags.map(t=>`<span class="hash-tag">#${htmlEnc(t)}</span>`).join('')}</div></div>`:''}
+  </div>`;
 }
 
 function _genThreadsPost(theme){
+  _thVar=0;
   const btn=document.getElementById('genBtn');
   btn.disabled=true;btn.textContent='生成中...';
-  setTimeout(()=>{
-    const fn=THREADS_POSTS[currentType]||THREADS_POSTS.ranking;
-    const p=fn(theme);
-    const useHash=document.getElementById('hashToggle').checked;
-    const tags=useHash?getHashtags(document.getElementById('genreSelect').value):[];
-    document.getElementById('outputPanel').innerHTML=`
-    <div class="out-header">
-      <div class="out-meta">
-        <span class="badge badge-threads">🧵 Threads</span>
-        <span class="badge ${TYPE_BADGES[currentType]||'badge-rank'}">${TYPE_LABELS[currentType]||''}</span>
-      </div>
-      <div class="out-actions"><button class="btn-sm" onclick="generateScript()">再生成</button></div>
+  setTimeout(()=>{ _renderThOutput(theme); btn.disabled=false;btn.textContent='台本を生成する'; },300);
+}
+
+function switchThVar(v,theme){ _thVar=v; _renderThOutput(theme); }
+
+function _renderThOutput(theme){
+  const variants=THREADS_POSTS[currentType]||THREADS_POSTS.ranking;
+  const tw=_getTrendWord();
+  const p=variants[_thVar]?variants[_thVar](theme,tw):variants[0](theme,tw);
+  const useHash=document.getElementById('hashToggle').checked;
+  const useStats=document.getElementById('statsToggle').checked;
+  const tags=useHash?getHashtags(document.getElementById('genreSelect').value):[];
+  const cta=_getThCTA();
+  const stat=useStats?_getStatLine(theme):'';
+  const varLabels=['本音型','観察型','コミュニティ型'];
+  document.getElementById('outputPanel').innerHTML=`
+  <div class="out-header">
+    <div class="out-meta">
+      <span class="badge badge-threads">🧵 Threads</span>
+      <span class="badge ${TYPE_BADGES[currentType]||'badge-rank'}">${TYPE_LABELS[currentType]||''}</span>
+      <span class="stat-chip">${htmlEnc(p.angle)}</span>
     </div>
-    <div class="out-body">
-      <div style="font-size:11px;color:var(--t3);background:var(--s2);border-radius:6px;padding:8px 12px;margin-bottom:14px">💡 ${PLAT_TIPS.threads}</div>
-      ${_thCard('本音型',p.honest)}
-      ${_thCard('問いかけ型',p.question)}
-      ${_thCard('会話型',p.conversation)}
-      ${_thCard('共感型',p.empathy)}
-      ${_thCard('締めの一言',p.closing)}
-      ${useHash&&tags.length?`<div class="hash-section"><div class="hash-title"># ハッシュタグ</div><div class="hash-tags">${tags.map(t=>`<span class="hash-tag">#${htmlEnc(t)}</span>`).join('')}</div></div>`:''}
-    </div>`;
-    btn.disabled=false;btn.textContent='台本を生成する';
-  },300);
+    <div class="out-actions"><button class="btn-sm" onclick="_genThreadsPost('${esc(theme)}')">再生成</button></div>
+  </div>
+  <div class="out-body">
+    <div style="font-size:11px;color:var(--t3);background:var(--s2);border-radius:6px;padding:8px 12px;margin-bottom:14px">💡 ${PLAT_TIPS.threads}</div>
+    <div class="var-tabs">${variants.map((_,i)=>`<button class="var-tab${i===_thVar?' active':''}" onclick="switchThVar(${i},'${esc(theme)}')">${varLabels[i]||'パターン'+(i+1)}</button>`).join('')}</div>
+    ${_thCard('✍️ 本音型',applyTone(p.honest))}
+    ${_thCard('❓ 問いかけ型',applyTone(p.question))}
+    ${_thCard('💬 会話型',applyTone(p.conversation))}
+    ${_thCard('🤝 共感型',applyTone(p.empathy))}
+    ${_thCard('🎯 締めの一言',applyTone(p.closing))}
+    ${stat?`<div style="font-size:11px;color:var(--t3);background:var(--s2);border:1px solid var(--b1);border-radius:6px;padding:8px 12px;margin:4px 0 10px">📊 ${htmlEnc(stat)}</div>`:''}
+    ${cta?`<div style="margin-bottom:10px"><div class="cof-label">CTA</div><div class="cof-text" style="font-size:12px" onclick="copyText('${esc(cta)}')">${htmlEnc(cta)}</div></div>`:''}
+    ${useHash&&tags.length?`<div class="hash-section"><div class="hash-title"># ハッシュタグ</div><div class="hash-tags">${tags.map(t=>`<span class="hash-tag">#${htmlEnc(t)}</span>`).join('')}</div></div>`:''}
+  </div>`;
 }
 
 function _xCard(label,text){
   if(!text)return'';
-  const chars=text.length;
-  const cls=chars>120?'color:var(--red)':chars>80?'color:var(--amber)':'color:var(--green)';
+  const chars=text.replace(/\n/g,'').length;
+  const col=chars>120?'var(--red)':chars>80?'var(--amber)':'var(--green)';
   return`<div style="margin-bottom:12px">
-    <div style="font-size:10px;font-weight:700;color:var(--t3);letter-spacing:.5px;text-transform:uppercase;margin-bottom:5px;display:flex;justify-content:space-between">
-      <span>${htmlEnc(label)}</span><span style="${cls}">${chars}字</span>
+    <div style="font-size:10px;font-weight:700;color:var(--t3);letter-spacing:.5px;margin-bottom:5px;display:flex;justify-content:space-between;align-items:center">
+      <span>${htmlEnc(label)}</span><span style="color:${col};font-variant-numeric:tabular-nums">${chars}字</span>
     </div>
-    <div style="background:var(--s2);border:1px solid var(--b1);border-radius:7px;padding:12px 14px;font-size:13px;line-height:1.8;color:var(--t1);white-space:pre-wrap;cursor:pointer;transition:background .12s" onclick="copyText('${esc(text)}')" title="クリックでコピー">${htmlEnc(text)}</div>
+    <div style="background:var(--s2);border:1px solid var(--b1);border-radius:7px;padding:12px 14px;font-size:13px;line-height:1.8;color:var(--t1);white-space:pre-wrap;cursor:pointer;transition:background .12s" onclick="copyText('${esc(text)}')">${htmlEnc(text)}</div>
     <div style="font-size:9px;color:var(--t3);text-align:right;margin-top:2px">クリックでコピー</div>
   </div>`;
 }
@@ -2909,8 +3091,8 @@ function _xCard(label,text){
 function _thCard(label,text){
   if(!text)return'';
   return`<div style="margin-bottom:12px">
-    <div style="font-size:10px;font-weight:700;color:var(--t3);letter-spacing:.5px;text-transform:uppercase;margin-bottom:5px">${htmlEnc(label)}</div>
-    <div style="background:var(--s2);border:1px solid var(--b1);border-radius:7px;padding:12px 14px;font-size:13px;line-height:1.9;color:var(--t1);white-space:pre-wrap;cursor:pointer;transition:background .12s" onclick="copyText('${esc(text)}')" title="クリックでコピー">${htmlEnc(text)}</div>
+    <div style="font-size:10px;font-weight:700;color:var(--t3);letter-spacing:.5px;margin-bottom:5px">${htmlEnc(label)}</div>
+    <div style="background:var(--s2);border:1px solid var(--b1);border-radius:7px;padding:12px 14px;font-size:13px;line-height:1.9;color:var(--t1);white-space:pre-wrap;cursor:pointer;transition:background .12s" onclick="copyText('${esc(text)}')">${htmlEnc(text)}</div>
     <div style="font-size:9px;color:var(--t3);text-align:right;margin-top:2px">クリックでコピー</div>
   </div>`;
 }
