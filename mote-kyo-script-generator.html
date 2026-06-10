@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
@@ -34,7 +34,8 @@ nav::-webkit-scrollbar{display:none}
 @media(max-width:860px){.gen-layout{grid-template-columns:1fr}}
 
 /* ── PANEL ── */
-.panel{background:var(--s1);border:1px solid var(--b1);border-radius:var(--r);padding:20px}
+.panel{background:var(--s1);border:1px solid var(--b1);border-radius:var(--r);padding:20px;position:sticky;top:16px;max-height:calc(100vh - 72px);overflow-y:auto;scrollbar-width:thin}
+.panel .btn-gen{position:sticky;bottom:0;z-index:5;box-shadow:0 -8px 16px var(--s1)}
 .panel-title{font-size:10px;font-weight:700;letter-spacing:1.5px;color:var(--t3);text-transform:uppercase;margin-bottom:16px}
 
 /* ── PLATFORM TOGGLE ── */
@@ -714,6 +715,38 @@ input[type=range]{width:90px;accent-color:var(--gold);cursor:pointer;background:
 .dreamina-workflow-step:last-child{margin-bottom:0}
 .dreamina-step-num{background:rgba(139,92,246,.15);color:var(--purple);border-radius:4px;padding:2px 7px;font-weight:800;font-size:10px;flex-shrink:0;white-space:nowrap}
 .dreamina-step-body{font-size:12px;color:var(--t2);line-height:1.6}
+
+/* ── CLAUDE AI MODE ── */
+.mode-row{display:flex;gap:8px;margin-bottom:4px}
+.mode-btn{flex:1;padding:8px 6px;border-radius:6px;border:1px solid var(--b2);background:var(--s2);color:var(--t2);font-size:11px;font-weight:700;cursor:pointer;font-family:inherit;transition:all .15s}
+.mode-btn:hover{color:var(--t1)}
+.mode-btn.active{background:rgba(139,92,246,.18);border-color:var(--purple);color:#c4b5fd}
+.claude-section{display:none;border-top:1px solid var(--b1);margin-top:12px;padding-top:12px}
+.claude-section.visible{display:block}
+.claude-api-input{width:100%;background:var(--s3);border:1px solid var(--b2);border-radius:6px;padding:8px 10px;color:var(--t1);font-size:11px;font-family:'Courier New',monospace;outline:none;transition:border .12s}
+.claude-api-input:focus{border-color:var(--purple)}
+.plat-check-row{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.plat-check{display:flex;align-items:center;gap:4px;background:var(--s3);border:1px solid var(--b1);border-radius:5px;padding:5px 8px;cursor:pointer;font-size:11px;color:var(--t2);transition:all .12s;user-select:none}
+.plat-check input{display:none}
+.plat-check.checked{background:rgba(139,92,246,.12);border-color:rgba(139,92,246,.4);color:#c4b5fd}
+.feat-checks{display:flex;flex-direction:column;gap:6px;margin-top:6px}
+.feat-check{display:flex;align-items:center;gap:7px;font-size:11px;color:var(--t2);cursor:pointer;padding:2px 0}
+.feat-check input[type=checkbox]{accent-color:var(--purple);width:13px;height:13px;cursor:pointer;flex-shrink:0}
+.claude-out-plat{border:1px solid var(--b2);border-radius:8px;margin-bottom:12px;overflow:hidden}
+.claude-out-plat-hd{background:var(--s2);padding:9px 12px;font-size:11px;font-weight:700;color:var(--gold);display:flex;align-items:center;gap:6px;border-bottom:1px solid var(--b1)}
+.claude-out-fields{padding:12px;display:grid;gap:9px}
+.cof-label{font-size:9px;font-weight:700;color:var(--t3);letter-spacing:.6px;text-transform:uppercase;margin-bottom:3px}
+.cof-text{font-size:12px;line-height:1.85;color:var(--t1);background:var(--s3);border-radius:5px;padding:8px 10px;white-space:pre-wrap;word-break:break-word;cursor:pointer;transition:background .12s;border:1px solid transparent}
+.cof-text:hover{background:var(--b1);border-color:var(--b2)}
+.cof-copy-hint{font-size:9px;color:var(--t3);text-align:right;margin-top:2px}
+.cof-tags{display:flex;flex-wrap:wrap;gap:4px;margin-top:4px}
+.cof-tag{background:rgba(139,92,246,.1);border:1px solid rgba(139,92,246,.2);color:#c4b5fd;border-radius:4px;padding:2px 6px;font-size:10px}
+.claude-sec-hd{font-size:10px;font-weight:700;color:var(--gold);letter-spacing:.5px;text-transform:uppercase;margin:16px 0 8px;display:flex;align-items:center;gap:8px}
+.claude-sec-hd::after{content:'';flex:1;height:1px;background:var(--b1)}
+.claude-hooks-list{display:grid;gap:6px;margin-bottom:14px}
+.claude-hook-item{background:var(--s2);border:1px solid var(--b1);border-radius:6px;padding:8px 10px;font-size:12px;color:var(--t1);cursor:pointer;transition:all .12s;display:flex;align-items:flex-start;gap:8px;line-height:1.7}
+.claude-hook-item:hover{border-color:var(--gold);background:var(--s3)}
+.hook-type-badge{font-size:9px;background:rgba(200,169,110,.12);color:var(--gold);border-radius:3px;padding:2px 5px;white-space:nowrap;flex-shrink:0;margin-top:2px}
 </style>
 </head>
 <body>
@@ -920,6 +953,97 @@ input[type=range]{width:90px;accent-color:var(--gold);cursor:pointer;background:
         </label>
       </div>
     </div>
+
+    <!-- MODE SELECTOR -->
+    <div class="fg" style="border-top:1px solid var(--b1);padding-top:14px;margin-top:6px">
+      <label>生成モード</label>
+      <div class="mode-row">
+        <button class="mode-btn active" id="modeLocalBtn" onclick="selectMode('local')">⚡ ローカル</button>
+        <button class="mode-btn" id="modeClaudeBtn" onclick="selectMode('claude')">🤖 Claude AI</button>
+      </div>
+    </div>
+
+    <!-- CLAUDE AI SECTION -->
+    <div class="claude-section" id="claudeSection">
+      <div class="fg">
+        <label>Claude API キー <span style="font-size:10px;color:var(--t3)">ブラウザのlocalStorageに保存</span></label>
+        <input type="password" class="claude-api-input" id="claudeApiKey" placeholder="sk-ant-api03-..." oninput="saveApiKey(this.value)">
+      </div>
+      <div class="fg">
+        <label>出力プラットフォーム（複数選択可）</label>
+        <div class="plat-check-row">
+          <label class="plat-check checked" id="cp-TikTok" onclick="togglePlatCheck(this,'TikTok')"><input type="checkbox" checked>🎵 TikTok</label>
+          <label class="plat-check checked" id="cp-Instagram" onclick="togglePlatCheck(this,'Instagram')"><input type="checkbox" checked>📸 IG</label>
+          <label class="plat-check" id="cp-X" onclick="togglePlatCheck(this,'X')"><input type="checkbox">𝕏 X</label>
+          <label class="plat-check" id="cp-Threads" onclick="togglePlatCheck(this,'Threads')"><input type="checkbox">🧵 Threads</label>
+        </div>
+      </div>
+      <div class="fg">
+        <label>ターゲット<span style="font-size:10px;color:var(--t3);margin-left:4px">任意</span></label>
+        <input type="text" id="claudeTarget" placeholder="例：20代女性、恋愛迷子の男性…">
+      </div>
+      <div class="fg">
+        <label>追加機能</label>
+        <div class="feat-checks">
+          <label class="feat-check"><input type="checkbox" id="optHooks"> フック10案を生成</label>
+          <label class="feat-check"><input type="checkbox" id="optXOpt"> X向け最適化（5パターン）</label>
+          <label class="feat-check"><input type="checkbox" id="optThOpt"> Threads向け最適化（5パターン）</label>
+          <label class="feat-check"><input type="checkbox" id="optWinPost"> 当たり投稿を横展開（資産化）</label>
+          <label class="feat-check"><input type="checkbox" id="optFact"> ファクトチェック</label>
+          <label class="feat-check"><input type="checkbox" id="optSafe"> 安全性チェック</label>
+        </div>
+      </div>
+      <div class="fg">
+        <label>既存投稿（リライト・横展開用）<span style="font-size:10px;color:var(--t3);margin-left:4px">任意</span></label>
+        <textarea id="sourcePostInput" placeholder="既存の投稿文を貼り付け…" style="min-height:56px;width:100%;background:var(--s3);border:1px solid var(--b1);border-radius:6px;padding:8px 10px;font-size:12px;color:var(--t1);resize:vertical;font-family:inherit;outline:none"></textarea>
+      </div>
+      <div class="fg">
+        <label>リライトモード<span style="font-size:10px;color:var(--t3);margin-left:4px">任意</span></label>
+        <select id="rewriteModeSelect">
+          <option value="">なし</option>
+          <option>もっと強め</option>
+          <option>もっとやさしく</option>
+          <option>もっと共感寄り</option>
+          <option>もっと保存向け</option>
+          <option>女性向けに寄せる</option>
+          <option>男性向けに寄せる</option>
+          <option>恋愛の真理っぽくする</option>
+        </select>
+      </div>
+      <div class="fg">
+        <label>横展開モード<span style="font-size:10px;color:var(--t3);margin-left:4px">任意</span></label>
+        <select id="repurposeModeSelect">
+          <option value="">なし</option>
+          <option>ランキング化</option>
+          <option>あるある化</option>
+          <option>見抜き方化</option>
+          <option>男女逆転版</option>
+          <option>保存向け化</option>
+          <option>X短文化</option>
+          <option>Threads会話化</option>
+        </select>
+      </div>
+      <div class="fg">
+        <label>コメント返信<span style="font-size:10px;color:var(--t3);margin-left:4px">任意</span></label>
+        <textarea id="commentText" placeholder="返信したいコメントを貼り付け…" style="min-height:46px;width:100%;background:var(--s3);border:1px solid var(--b1);border-radius:6px;padding:8px 10px;font-size:12px;color:var(--t1);resize:vertical;font-family:inherit;outline:none"></textarea>
+        <select id="commentReplyMode" style="margin-top:6px">
+          <option value="">返信スタイルを選択</option>
+          <option>共感しつつ返す</option>
+          <option>軽く会話を伸ばす</option>
+          <option>否定を受け流す</option>
+          <option>相談に丁寧に返す</option>
+          <option>少し鋭く返す</option>
+        </select>
+      </div>
+      <div class="fg">
+        <label>目的タグ<span style="font-size:10px;color:var(--t3);margin-left:4px">任意・カンマ区切り</span></label>
+        <input type="text" id="claudePurposeTags" placeholder="例：拡散, ファン化, 保存">
+      </div>
+      <div class="fg">
+        <label>ステータス<span style="font-size:10px;color:var(--t3);margin-left:4px">任意</span></label>
+        <input type="text" id="claudeStatus" placeholder="例：下書き, 投稿済み, A/Bテスト中">
+      </div>
+    </div><!-- /claudeSection -->
 
     <div class="wp-bar" id="wpBar"></div>
     <button class="btn-gen" id="genBtn" onclick="generateScript()">台本を生成する</button>
@@ -2534,6 +2658,7 @@ function segmentMainText(mainText,count){
 
 
 function generateScript(){
+  if(typeof currentMode!=='undefined'&&currentMode==='claude'){claudeGenerateScript();return;}
   const theme=document.getElementById('themeInput').value.trim();
   if(!theme){document.getElementById('themeInput').focus();return;}
   const btn=document.getElementById('genBtn');
@@ -3977,6 +4102,705 @@ if(document.readyState==='loading'){
   // DOMContentLoaded がすでに発火済みの場合も対応
   _initApp();
 }
+
+// ═══════════════════════════════════════════════════
+//  CLAUDE AI MODE
+// ═══════════════════════════════════════════════════
+let currentMode = 'local';
+let selectedPlatforms = new Set(['TikTok','Instagram']);
+
+function selectMode(mode){
+  currentMode = mode;
+  document.getElementById('modeLocalBtn').classList.toggle('active', mode==='local');
+  document.getElementById('modeClaudeBtn').classList.toggle('active', mode==='claude');
+  document.getElementById('claudeSection').classList.toggle('visible', mode==='claude');
+}
+
+function saveApiKey(val){
+  try{ val ? localStorage.setItem('mk_claude_key', val) : localStorage.removeItem('mk_claude_key'); }catch(e){}
+}
+
+function loadApiKey(){
+  try{
+    const k = localStorage.getItem('mk_claude_key');
+    if(k){ const el=document.getElementById('claudeApiKey'); if(el) el.value=k; }
+    return k||'';
+  }catch(e){ return ''; }
+}
+
+function togglePlatCheck(el, plat){
+  const cb = el.querySelector('input[type=checkbox]');
+  const nowChecked = !cb.checked;
+  cb.checked = nowChecked;
+  el.classList.toggle('checked', nowChecked);
+  if(nowChecked) selectedPlatforms.add(plat);
+  else selectedPlatforms.delete(plat);
+}
+
+// ── SYSTEM PROMPT ──
+const CLAUDE_SYSTEM_PROMPT = `あなたは、恋愛・モテ・男女の違い・人間観察・共感・恋愛心理をテーマにしたSNS運用アシスタントです。
+目的は、1つのテーマをもとに、TikTok・Instagram・X・Threads向けに最適化された投稿文を作り、必要に応じてリライト、横展開、短文化、会話化、コメント返信、安全確認、運用管理まで行うことです。
+
+================================
+【基本方針】
+================================
+- 出力はすべて日本語
+- スマホで見やすい短文中心
+- 読んだ瞬間に意味が伝わることを優先
+- 回りくどい説明は禁止
+- 抽象論ではなく、実際に投稿できる完成文にする
+- 同じテーマでも媒体ごとに見せ方を必ず変える
+- TikTokは止める
+- Instagramは保存させる
+- Xは一言で刺す
+- Threadsは会話を生む
+- 恋愛・心理系の表現は、断定しすぎず、でも弱くしすぎない
+- キレイごとで終わらせず、現実感を入れる
+- 攻撃的すぎる表現や決めつけ表現は避ける
+- 投稿として使える完成度で出す
+- 指定された機能だけを実行し、不要な説明は足さない
+- 出力はコピペしやすく整理する
+
+================================
+【媒体ごとの役割】
+================================
+
+■ TikTok
+役割：新規流入 / スクロール停止 / 感情を動かす / 最初の2秒で見たいと思わせる
+
+ルール：
+- 冒頭フック最優先（強め・共感・意外性の3種類を必ず出す）
+- 断定・意外性・危機感・共感を使う
+- 読み上げやすい文にする
+- テンポよく進める
+- 長い説明は禁止
+- 保存やフォローにつながる締めを入れる
+
+■ Instagram
+役割：保存 / 信頼 / 世界観 / 見返したくなる整理感
+
+ルール：
+- カルーセル前提で整理する
+- 1枚1メッセージ
+- タイトルは強く
+- 本文は短く
+- 保存したくなるまとめ感を出す
+- 必要ならリール向け短尺版も出す
+
+■ X
+役割：一言で刺す / 拡散 / 鋭い言語化 / この人わかってる感を出す
+
+ルール：
+- 無駄な説明を削る
+- 一文目を強くする
+- 短く鋭く
+- 共感か真理か対比を立てる
+- 1投稿で完結させる
+
+■ Threads
+役割：会話を生む / 親密度を上げる / 人間味を出す / 続きを見たくさせる
+
+ルール：
+- Xより少しやわらかく、でも薄くしない
+- 少し余白を残す
+- 問いかけや本音を混ぜる
+- 会話が生まれやすい締めにする
+- 言い切りすぎない形も可
+
+================================
+【ランキングルール】
+================================
+テーマがランキング向きの場合は、必ずランキング形式を優先すること。
+
+ルール：
+- 必ずTOP5
+- 必ず 5位 → 4位 → 3位 → 2位 → 1位 の順で出す
+- 各順位は1〜2文で簡潔に説明
+- 抽象的すぎず、行動や空気感が想像できる表現にする
+- 1位は最も刺さる内容にする
+- 順位が上がるほど本質感やあるある感を強くする
+
+================================
+【非ランキングルール】
+================================
+ランキングに向かないテーマは、以下のいずれかで整理すること：
+- 3つの特徴 / 3〜5つの本質 / よくある勘違い / やりがちな失敗
+- 恋愛の真理 / 共感あるある / 見抜き方 / 本命とキープの違い / モテる人とモテない人の差
+
+================================
+【表現ルール】
+================================
+優先して使う表現：
+- 実は / 〜な人ほど / これ、恋愛でかなり大事 / 〜してる人、かなり多い
+- 優しいのに報われない人って / モテる人は〇〇じゃなくて〇〇
+- 追うほど雑に扱われる / 本命には意外と〇〇しない
+- 好きより先に、〇〇を見た方がいい / うまくいかない人って、だいたいここを間違える
+
+避ける表現：
+- 長すぎる前置き / ふわっとした自己啓発 / 根拠が弱い断言の連発
+- 同じ言い回しの繰り返し / 説教くさいまとめ / 属性全体を決めつける言い方 / 過度な攻撃表現
+
+================================
+【機能ごとの実行ルール】
+================================
+
+■ 1. 基本生成
+入力された theme / platforms / target / purpose_tags をもとに、選択された媒体だけ出力すること。
+platforms に含まれていない媒体は出力しないこと。
+source_post がある場合はそれを元に、ない場合は theme を元に新規作成する。
+
+■ 2. ターゲット指定
+target に合わせて語り口・具体例・刺さる角度を変えること。
+例：女性向け / 男性向け / 男女両方向け / 20代向け / 30代向け / 恋愛で悩みやすい人向け
+
+■ 3. フック自動生成（hooks_required=true の時のみ）
+フックを10案出すこと。強め・共感・危機感・意外性・真理を各2案以上含めること。
+短く・一瞬で意味が伝わる・TikTok/リール/Xの冒頭に使えるものにし、強い順に並べること。
+
+■ 4. X用短文化（x_optimize=true の時のみ）
+80字前後版・120字前後版・鋭め版・共感版・箇条書き版を出すこと。
+ただ削るのではなくX向けに再設計し、一文目を強くすること。
+
+■ 5. Threads用会話化（threads_optimize=true の時のみ）
+本音型・問いかけ型・会話型・共感型・締めの一言を出すこと。
+少しやわらかくしつつ薄くしない。会話が起きやすい余白を残すこと。
+
+■ 6. リライト機能（rewrite_mode に値がある時のみ）
+対応モード：もっと強め / もっとやさしく / もっと共感寄り / もっと保存向け / 女性向けに寄せる / 男性向けに寄せる / 恋愛の真理っぽくする
+出力：元文 + リライト後 + 変更ポイント
+
+■ 7. 横展開機能（repurpose_mode に値がある時のみ）
+対応モード：ランキング化 / あるある化 / 見抜き方化 / 男女逆転版 / 保存向け化 / X短文化 / Threads会話化
+出力：元投稿の要点 + 新しい切り口 + 再生成結果
+
+■ 8. 当たり投稿の横展開（winning_post_repurpose=true の時のみ）
+伸びた投稿の資産化モード。以下から最適な案を3〜5個提案すること：
+ランキング化 / 切り口変更 / 男女逆転版 / TikTok→Instagram変換 / X→Threads変換 / 強め版/共感版再作成
+出力：勝ち要素 + 横展開案3〜5個 + 最有力案の完成文
+
+■ 9. コメント返信生成（comment_reply_mode に値がある時のみ）
+対応モード：共感しつつ返す / 軽く会話を伸ばす / 否定を受け流す / 相談に丁寧に返す / 少し鋭く返す
+出力：短め返信 + やさしめ返信 + 会話を広げる返信 + 炎上しにくい返信
+comment_text が空なら error を返すこと。
+
+■ 10. ファクトチェック（fact_check=true の時のみ）
+断定強すぎ・言い切りすぎ・誤解を生みやすい箇所をチェックすること。
+チェック対象例：必ず / 絶対 / 100% / 男はみんな / 女はみんな / 本命なら絶対こうする
+出力：注意箇所 + なぜ危ないか + 修正案 + 安全な表現
+
+■ 11. 安全チェック（safety_check=true の時のみ）
+攻撃的すぎる表現 / 属性決めつけ / 誹謗っぽい表現 / 過剰な煽りをチェックすること。
+出力：危険表現 + リスクの理由 + マイルド化案 + 置き換え表現
+
+■ 12. 管理情報（status または purpose_tags がある時のみ）
+status が空でない場合：出力の最後にステータスを表示すること。
+purpose_tags が空でない場合：出力の最後に目的タグを整理して表示すること。
+
+================================
+【バリデーション】
+================================
+- theme と source_post の両方が空の場合は、error タグにメッセージを返すこと
+- comment_reply_mode があるのに comment_text が空の場合は、error を返すこと
+- platforms に含まれていない媒体は出力しないこと
+- 未実行の機能の出力タグは省略すること
+
+================================
+【最終ルール】
+================================
+- できるだけ完成品で返す
+- 思考過程は出さない
+- 指示されていない余計な補足はしない
+- 使い回せる形で出す
+- 迷ったら「短く・強く・わかりやすく」を優先する
+
+================================
+【出力形式】
+================================
+以下のXMLのみを返してください。前置き・説明・マークダウンコードブロックは不要です。
+
+<response>
+  <theme></theme>
+  <angle></angle>
+
+  <hooks>
+    <hook type="強め|共感|危機感|意外性|真理"></hook>
+  </hooks>
+
+  <platform_outputs>
+    <tiktok>
+      <title></title>
+      <hook_candidates>
+        <hook number="1" type="強め"></hook>
+        <hook number="2" type="共感"></hook>
+        <hook number="3" type="意外性"></hook>
+      </hook_candidates>
+      <tscript></tscript>
+      <teleprompter_version></teleprompter_version>
+      <caption></caption>
+      <hashtags><tag></tag></hashtags>
+    </tiktok>
+    <instagram>
+      <title></title>
+      <carousel>
+        <page number="1"></page>
+        <page number="2"></page>
+        <page number="3"></page>
+        <page number="4"></page>
+        <page number="5"></page>
+        <page number="6"></page>
+        <page number="7"></page>
+        <page number="8"></page>
+      </carousel>
+      <caption></caption>
+      <cta></cta>
+      <hashtags><tag></tag></hashtags>
+      <reel_script></reel_script>
+    </instagram>
+    <x>
+      <short></short>
+      <sharp></sharp>
+      <empathy></empathy>
+      <list></list>
+    </x>
+    <threads>
+      <honest></honest>
+      <question></question>
+      <conversation></conversation>
+      <empathy></empathy>
+      <closing></closing>
+    </threads>
+  </platform_outputs>
+
+  <optimizations>
+    <x_optimized>
+      <short_80></short_80>
+      <short_120></short_120>
+      <sharp></sharp>
+      <empathy></empathy>
+      <list></list>
+    </x_optimized>
+    <threads_optimized>
+      <honest></honest>
+      <question></question>
+      <conversation></conversation>
+      <empathy></empathy>
+      <closing></closing>
+    </threads_optimized>
+  </optimizations>
+
+  <rewrite>
+    <original></original>
+    <rewritten></rewritten>
+    <changes></changes>
+  </rewrite>
+
+  <repurpose>
+    <key_points></key_points>
+    <new_angle></new_angle>
+    <result></result>
+  </repurpose>
+
+  <winning_post_repurpose>
+    <winning_elements></winning_elements>
+    <expansion_ideas>
+      <idea></idea>
+    </expansion_ideas>
+    <best_candidate></best_candidate>
+  </winning_post_repurpose>
+
+  <comment_reply>
+    <short></short>
+    <gentle></gentle>
+    <extend></extend>
+    <safe></safe>
+  </comment_reply>
+
+  <fact_check>
+    <issues>
+      <issue>
+        <spot></spot>
+        <why></why>
+        <fix></fix>
+        <safe></safe>
+      </issue>
+    </issues>
+  </fact_check>
+
+  <safety_check>
+    <dangers>
+      <danger>
+        <expr></expr>
+        <risk></risk>
+        <mild></mild>
+        <replace></replace>
+      </danger>
+    </dangers>
+  </safety_check>
+
+  <supplementary>
+    <why_it_works></why_it_works>
+    <best_platform></best_platform>
+    <save_trigger></save_trigger>
+    <conversation_trigger></conversation_trigger>
+  </supplementary>
+
+  <management>
+    <status></status>
+    <purpose_tags>
+      <tag></tag>
+    </purpose_tags>
+  </management>
+
+  <error></error>
+</response>`;
+
+
+// ── BUILD USER INPUT (XML) ──
+function buildClaudeInput(){
+  const theme       = document.getElementById('themeInput').value.trim();
+  const sourcePost  = (document.getElementById('sourcePostInput')?.value||'').trim();
+  const target      = (document.getElementById('claudeTarget')?.value||'').trim();
+  const rewriteMode = document.getElementById('rewriteModeSelect')?.value||'';
+  const repurpose   = document.getElementById('repurposeModeSelect')?.value||'';
+  const commentText = (document.getElementById('commentText')?.value||'').trim();
+  const commentMode = document.getElementById('commentReplyMode')?.value||'';
+  const status      = (document.getElementById('claudeStatus')?.value||'').trim();
+  const rawTags     = (document.getElementById('claudePurposeTags')?.value||'').trim();
+  const tags        = rawTags ? rawTags.split(/[,、]/).map(t=>t.trim()).filter(Boolean) : [];
+
+  const plats = [...selectedPlatforms].map(p=>`    <platform>${p}</platform>`).join('\n');
+  const tagXml = tags.length ? tags.map(t=>`    <tag>${t}</tag>`).join('\n') : '';
+
+  return `<request>
+  <theme><![CDATA[${theme}]]></theme>
+
+  <platforms>
+${plats}
+  </platforms>
+
+  <target><![CDATA[${target}]]></target>
+
+  <purpose_tags>
+${tagXml}
+  </purpose_tags>
+
+  <hooks_required>${!!(document.getElementById('optHooks')?.checked)}</hooks_required>
+  <x_optimize>${!!(document.getElementById('optXOpt')?.checked)}</x_optimize>
+  <threads_optimize>${!!(document.getElementById('optThOpt')?.checked)}</threads_optimize>
+
+  <rewrite_mode><![CDATA[${rewriteMode}]]></rewrite_mode>
+  <repurpose_mode><![CDATA[${repurpose}]]></repurpose_mode>
+  <winning_post_repurpose>${!!(document.getElementById('optWinPost')?.checked)}</winning_post_repurpose>
+
+  <comment_text><![CDATA[${commentText}]]></comment_text>
+  <comment_reply_mode><![CDATA[${commentMode}]]></comment_reply_mode>
+
+  <fact_check>${!!(document.getElementById('optFact')?.checked)}</fact_check>
+  <safety_check>${!!(document.getElementById('optSafe')?.checked)}</safety_check>
+
+  <status><![CDATA[${status}]]></status>
+
+  <source_post><![CDATA[${sourcePost}]]></source_post>
+</request>`;
+}
+
+// ── API CALL ──
+async function callClaudeAPI(apiKey, userInput){
+  const res = await fetch('https://api.anthropic.com/v1/messages', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'x-api-key': apiKey,
+      'anthropic-version': '2023-06-01',
+      'anthropic-dangerous-direct-browser-access': 'true'
+    },
+    body: JSON.stringify({
+      model: 'claude-sonnet-4-6',
+      max_tokens: 4096,
+      system: CLAUDE_SYSTEM_PROMPT,
+      messages: [{ role: 'user', content: userInput }]
+    })
+  });
+  if(!res.ok){
+    const err = await res.json().catch(()=>({}));
+    throw new Error(err.error?.message || 'API エラー ' + res.status);
+  }
+  const data = await res.json();
+  return data.content[0].text;
+}
+
+// ── XML PARSER ──
+function parseClaudeXML(raw){
+  const cleaned = raw.replace(/^```xml\s*/,'').replace(/^```\s*/,'').replace(/\s*```$/,'').trim();
+  const parser = new DOMParser();
+  let doc = parser.parseFromString(cleaned, 'text/xml');
+  if(doc.querySelector('parsererror')){
+    const m = cleaned.match(/<response[\s\S]*?<\/response>/);
+    if(m){ doc = parser.parseFromString(m[0], 'text/xml'); }
+    if(!m || doc.querySelector('parsererror')) throw new Error('XML の解析に失敗しました。');
+  }
+  return doc.querySelector('response');
+}
+
+function _gt(node, sel){ if(!node) return ''; const el=node.querySelector(sel); return el?el.textContent.trim():''; }
+function _ga(node, sel){ if(!node) return []; return Array.from(node.querySelectorAll(sel)).map(e=>e.textContent.trim()).filter(Boolean); }
+
+// ── RENDER PLATFORM BLOCK ──
+function renderCPlatBlock(icon, title, fields){
+  const rows = fields.map(f=>{
+    if(!f) return '';
+    if(f.tags){ if(!f.tags.length) return ''; return `<div><div class="cof-label">${htmlEnc(f.label)}</div><div class="cof-tags">${f.tags.map(t=>`<span class="cof-tag">${htmlEnc(t)}</span>`).join('')}</div></div>`; }
+    if(!f.text) return '';
+    return `<div><div class="cof-label">${htmlEnc(f.label)}</div><div class="cof-text" onclick="copyText('${esc(f.text)}')">${htmlEnc(f.text)}</div><div class="cof-copy-hint">クリックでコピー</div></div>`;
+  }).filter(Boolean).join('');
+  if(!rows) return '';
+  return `<div class="claude-out-plat"><div class="claude-out-plat-hd">${icon} ${htmlEnc(title)}</div><div class="claude-out-fields">${rows}</div></div>`;
+}
+
+// ── RENDER CLAUDE OUTPUT ──
+function renderClaudeOutput(response){
+  if(!response) return `<div style="color:var(--red);padding:16px">レスポンスを解析できませんでした。</div>`;
+  const err = _gt(response,'error');
+  if(err) return `<div style="color:var(--red);background:rgba(239,68,68,.07);border-radius:8px;padding:12px 14px;font-size:13px;line-height:1.7">⚠️ ${htmlEnc(err)}</div>`;
+
+  const theme = _gt(response,'theme');
+  const angle = _gt(response,'angle');
+  let html = `<div style="display:flex;align-items:center;gap:8px;margin-bottom:16px;flex-wrap:wrap">
+    <span class="badge" style="background:rgba(139,92,246,.15);color:#c4b5fd;border:1px solid rgba(139,92,246,.3)">🤖 Claude AI</span>
+    ${theme?`<span class="badge badge-rank">${htmlEnc(theme)}</span>`:''}
+    ${angle?`<span style="font-size:11px;color:var(--t3)">${htmlEnc(angle)}</span>`:''}
+    <button class="btn-sm" onclick="claudeGenerateScript()">再生成</button>
+  </div>`;
+
+  // HOOKS
+  const hooks = Array.from(response.querySelectorAll('hooks > hook'));
+  if(hooks.length){
+    html += `<div class="claude-sec-hd">フック候補 ${hooks.length}案</div><div class="claude-hooks-list">`;
+    hooks.forEach(h=>{
+      const type=h.getAttribute('type')||''; const text=h.textContent.trim();
+      if(text) html += `<div class="claude-hook-item" onclick="copyText('${esc(text)}')">${type?`<span class="hook-type-badge">${htmlEnc(type)}</span>`:''}<span>${htmlEnc(text)}</span></div>`;
+    });
+    html += '</div>';
+  }
+
+  // PLATFORM OUTPUTS
+  const po = response.querySelector('platform_outputs');
+  if(po){
+    const tk = po.querySelector('tiktok');
+    if(tk){
+      const hcs = Array.from(tk.querySelectorAll('hook_candidates > hook'));
+      const hooksText = hcs.length
+        ? hcs.map(h=>`【${h.getAttribute('type')||'フック'+h.getAttribute('number')}】${h.textContent.trim()}`).join('\n')
+        : '';
+      html += renderCPlatBlock('🎵','TikTok',[
+        {label:'タイトル', text:_gt(tk,'title')},
+        {label:'冒頭フック3案', text:hooksText},
+        {label:'台本', text:_gt(tk,'tscript')},
+        {label:'テロップ版', text:_gt(tk,'teleprompter_version')},
+        {label:'キャプション', text:_gt(tk,'caption')},
+        {label:'ハッシュタグ', tags:_ga(tk,'hashtags > tag')},
+      ]);
+    }
+
+    const ig = po.querySelector('instagram');
+    if(ig){
+      const pages = Array.from(ig.querySelectorAll('carousel > page'));
+      const carouselText = pages.map(p=>`${p.getAttribute('number')}枚目: ${p.textContent.trim()}`).filter(p=>p.split(': ')[1]).join('\n');
+      html += renderCPlatBlock('📸','Instagram',[
+        {label:'タイトル', text:_gt(ig,'title')},
+        {label:'カルーセル', text:carouselText},
+        {label:'キャプション', text:_gt(ig,'caption')},
+        {label:'CTA', text:_gt(ig,'cta')},
+        {label:'ハッシュタグ', tags:_ga(ig,'hashtags > tag')},
+        {label:'リールスクリプト', text:_gt(ig,'reel_script')},
+      ]);
+    }
+
+    const x = po.querySelector('x');
+    if(x) html += renderCPlatBlock('𝕏','X（ポスト）',[
+      {label:'短め 80字', text:_gt(x,'short')},
+      {label:'鋭め 120字', text:_gt(x,'sharp')},
+      {label:'共感版', text:_gt(x,'empathy')},
+      {label:'箇条書き版', text:_gt(x,'list')},
+    ]);
+
+    const th = po.querySelector('threads');
+    if(th) html += renderCPlatBlock('🧵','Threads',[
+      {label:'本音型', text:_gt(th,'honest')},
+      {label:'問いかけ型', text:_gt(th,'question')},
+      {label:'会話型', text:_gt(th,'conversation')},
+      {label:'共感型', text:_gt(th,'empathy')},
+      {label:'締め', text:_gt(th,'closing')},
+    ]);
+  }
+
+  // OPTIMIZATIONS
+  const opts = response.querySelector('optimizations');
+  if(opts){
+    const xo = opts.querySelector('x_optimized');
+    if(xo && (_gt(xo,'short_80')||_gt(xo,'sharp'))){
+      html += `<div class="claude-sec-hd">X 最適化</div>`;
+      html += renderCPlatBlock('𝕏','X 最適化（5パターン）',[
+        {label:'80字版', text:_gt(xo,'short_80')},
+        {label:'120字版', text:_gt(xo,'short_120')},
+        {label:'鋭め版', text:_gt(xo,'sharp')},
+        {label:'共感版', text:_gt(xo,'empathy')},
+        {label:'箇条書き版', text:_gt(xo,'list')},
+      ]);
+    }
+    const tho = opts.querySelector('threads_optimized');
+    if(tho && (_gt(tho,'honest')||_gt(tho,'question'))){
+      html += `<div class="claude-sec-hd">Threads 最適化</div>`;
+      html += renderCPlatBlock('🧵','Threads 最適化（5パターン）',[
+        {label:'本音型', text:_gt(tho,'honest')},
+        {label:'問いかけ型', text:_gt(tho,'question')},
+        {label:'会話型', text:_gt(tho,'conversation')},
+        {label:'共感型', text:_gt(tho,'empathy')},
+        {label:'締め', text:_gt(tho,'closing')},
+      ]);
+    }
+  }
+
+  // REWRITE
+  const rw = response.querySelector('rewrite');
+  if(rw && _gt(rw,'rewritten')){
+    html += `<div class="claude-sec-hd">リライト</div>`;
+    html += renderCPlatBlock('✏️','リライト結果',[
+      {label:'元文', text:_gt(rw,'original')},
+      {label:'リライト後', text:_gt(rw,'rewritten')},
+      {label:'変更ポイント', text:_gt(rw,'changes')},
+    ]);
+  }
+
+  // REPURPOSE
+  const rp = response.querySelector('repurpose');
+  if(rp && _gt(rp,'result')){
+    html += `<div class="claude-sec-hd">横展開</div>`;
+    html += renderCPlatBlock('🔄','横展開結果',[
+      {label:'元投稿の要点', text:_gt(rp,'key_points')},
+      {label:'新しい切り口', text:_gt(rp,'new_angle')},
+      {label:'再生成結果', text:_gt(rp,'result')},
+    ]);
+  }
+
+  // WINNING POST REPURPOSE
+  const wp = response.querySelector('winning_post_repurpose');
+  if(wp && _gt(wp,'best_candidate')){
+    html += `<div class="claude-sec-hd">当たり投稿 横展開</div>`;
+    const ideas = _ga(wp,'expansion_ideas > idea');
+    html += renderCPlatBlock('🏆','勝ち要素 & 横展開案',[
+      {label:'勝ち要素', text:_gt(wp,'winning_elements')},
+      {label:'横展開案', text:ideas.map((t,i)=>`${i+1}. ${t}`).join('\n')},
+      {label:'最有力案（完成文）', text:_gt(wp,'best_candidate')},
+    ]);
+  }
+
+  // COMMENT REPLY
+  const cr = response.querySelector('comment_reply');
+  if(cr && (_gt(cr,'short')||_gt(cr,'gentle'))){
+    html += `<div class="claude-sec-hd">コメント返信</div>`;
+    html += renderCPlatBlock('💬','返信案（4パターン）',[
+      {label:'短め返信', text:_gt(cr,'short')},
+      {label:'やさしめ返信', text:_gt(cr,'gentle')},
+      {label:'会話を広げる返信', text:_gt(cr,'extend')},
+      {label:'炎上しにくい返信', text:_gt(cr,'safe')},
+    ]);
+  }
+
+  // FACT CHECK
+  const fc = response.querySelector('fact_check');
+  if(fc){
+    const issues = Array.from(fc.querySelectorAll('issue'));
+    if(issues.length){
+      html += `<div class="claude-sec-hd">ファクトチェック</div>`;
+      issues.forEach(iss=>{
+        const spot=_gt(iss,'spot'), why=_gt(iss,'why'), fix=_gt(iss,'fix'), safe=_gt(iss,'safe');
+        html += renderCPlatBlock('⚠️','注意箇所',[
+          {label:'箇所', text:spot}, {label:'なぜ危ないか', text:why},
+          {label:'修正案', text:fix}, {label:'安全な言い換え', text:safe},
+        ]);
+      });
+    }
+  }
+
+  // SAFETY CHECK
+  const sc2 = response.querySelector('safety_check');
+  if(sc2){
+    const dangers = Array.from(sc2.querySelectorAll('danger'));
+    if(dangers.length){
+      html += `<div class="claude-sec-hd">安全性チェック</div>`;
+      dangers.forEach(d=>{
+        const expr=_gt(d,'expr'), risk=_gt(d,'risk'), mild=_gt(d,'mild'), rep=_gt(d,'replace');
+        html += renderCPlatBlock('🛡️','危険表現',[
+          {label:'危険表現', text:expr}, {label:'リスク理由', text:risk},
+          {label:'マイルド化案', text:mild}, {label:'置き換え表現', text:rep},
+        ]);
+      });
+    }
+  }
+
+  // SUPPLEMENTARY
+  const sup = response.querySelector('supplementary');
+  if(sup && (_gt(sup,'why_it_works')||_gt(sup,'best_platform'))){
+    html += `<div class="claude-sec-hd">補足・分析</div>`;
+    html += renderCPlatBlock('💡','この企画の分析',[
+      {label:'この企画が刺さる理由', text:_gt(sup,'why_it_works')},
+      {label:'最も伸びやすい媒体', text:_gt(sup,'best_platform')},
+      {label:'保存されやすいポイント', text:_gt(sup,'save_trigger')},
+      {label:'会話が生まれやすいポイント', text:_gt(sup,'conversation_trigger')},
+    ]);
+  }
+
+  // MANAGEMENT
+  const mgmt = response.querySelector('management');
+  if(mgmt){
+    const statusText = _gt(mgmt,'status');
+    const ptags = _ga(mgmt,'purpose_tags > tag');
+    if(statusText || ptags.length){
+      html += `<div class="claude-sec-hd">管理情報</div>`;
+      html += renderCPlatBlock('📋','ステータス & 目的タグ',[
+        {label:'ステータス', text:statusText},
+        {label:'目的タグ', tags:ptags},
+      ]);
+    }
+  }
+
+  return html;
+}
+
+// ── MAIN CLAUDE GENERATE ──
+async function claudeGenerateScript(){
+  const apiKey = (document.getElementById('claudeApiKey')?.value||'').trim() || loadApiKey();
+  if(!apiKey){
+    document.getElementById('outputPanel').innerHTML = `<div style="padding:20px;font-size:13px;line-height:1.9;color:var(--t2)">
+      <div style="color:var(--red);margin-bottom:10px;font-weight:700">⚠️ API キーが未入力です</div>
+      左パネルの「Claude API キー」に <code style="color:#c4b5fd;background:var(--s3);padding:1px 5px;border-radius:3px">sk-ant-...</code> を入力してください。<br>
+      <a href="https://console.anthropic.com/" target="_blank" style="color:var(--purple);font-size:12px">→ APIキーを取得する（console.anthropic.com）</a>
+    </div>`;
+    return;
+  }
+  const theme = document.getElementById('themeInput').value.trim();
+  const src = (document.getElementById('sourcePostInput')?.value||'').trim();
+  if(!theme && !src){ document.getElementById('themeInput').focus(); return; }
+  const input = buildClaudeInput();
+  const btn = document.getElementById('genBtn');
+  btn.disabled = true; btn.textContent = '🤖 生成中...';
+  document.getElementById('outputPanel').innerHTML = `<div class="loading"><div class="spinner"></div>Claude AI が生成中…<br><span style="font-size:11px;color:var(--t3);margin-top:6px;display:block">初回は10〜20秒ほどかかります</span></div>`;
+  try {
+    const raw = await callClaudeAPI(apiKey, input);
+    const node = parseClaudeXML(raw);
+    document.getElementById('outputPanel').innerHTML = `<div class="out-body">${renderClaudeOutput(node)}</div>`;
+  } catch(e) {
+    document.getElementById('outputPanel').innerHTML = `<div style="padding:20px;color:var(--red);font-size:13px;line-height:1.8">
+      ❌ エラー：${htmlEnc(e.message)}
+    </div>`;
+  } finally {
+    btn.disabled = false; btn.textContent = '台本を生成する';
+  }
+}
+
+// Init
+(function(){ try{ loadApiKey(); }catch(e){} })();
 </script>
 
 <!-- ── POST DETAIL MODAL ── -->
