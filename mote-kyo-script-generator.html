@@ -109,6 +109,8 @@ input[type=range]{width:90px;accent-color:var(--gold);cursor:pointer;background:
 .badge-aru{background:rgba(236,72,153,.15);color:#ec4899;border:1px solid rgba(236,72,153,.3)}
 .badge-tiktok{background:rgba(239,68,68,.12);color:#f87171;border:1px solid rgba(239,68,68,.25)}
 .badge-instagram{background:rgba(139,92,246,.12);color:#a78bfa;border:1px solid rgba(139,92,246,.25)}
+.badge-x{background:rgba(231,233,234,.08);color:#e7e9ea;border:1px solid rgba(231,233,234,.2)}
+.badge-threads{background:rgba(74,222,128,.08);color:#4ade80;border:1px solid rgba(74,222,128,.2)}
 .stat-chip{font-size:11px;color:var(--t3);background:var(--s2);padding:2px 8px;border-radius:4px}
 .out-actions{display:flex;gap:6px}
 .out-body{padding:24px}
@@ -796,7 +798,7 @@ input[type=range]{width:90px;accent-color:var(--gold);cursor:pointer;background:
     <!-- Platform -->
     <div class="fg">
       <label>プラットフォーム</label>
-      <div class="platform-row">
+      <div class="platform-row" style="flex-wrap:wrap;gap:6px">
         <button class="plat-btn active" data-plat="tiktok" onclick="selectPlat(this)">
           <span class="icon">🎵</span>
           <div class="label">TikTok</div>
@@ -804,6 +806,14 @@ input[type=range]{width:90px;accent-color:var(--gold);cursor:pointer;background:
         <button class="plat-btn" data-plat="instagram" onclick="selectPlat(this)">
           <span class="icon">📸</span>
           <div class="label">Instagram</div>
+        </button>
+        <button class="plat-btn" data-plat="x" onclick="selectPlat(this)">
+          <span class="icon">𝕏</span>
+          <div class="label">X</div>
+        </button>
+        <button class="plat-btn" data-plat="threads" onclick="selectPlat(this)">
+          <span class="icon">🧵</span>
+          <div class="label">Threads</div>
         </button>
       </div>
     </div>
@@ -1825,6 +1835,78 @@ const CLOSES={
   aru:(t)=>`「当てはまった」って思った人——それ、無意識に正解の行動してるってことです。才能じゃなくて、習慣。意識すればもっと伸ばせる。`,
 };
 
+// ── X / Threads ローカルテンプレート ──
+const X_POSTS={
+  ranking:t=>({
+    short:`${t}——知らないと損するやつ。`,
+    sharp:`モテる人とそうじゃない人の差は「${t}」に全部詰まってる。`,
+    empathy:`「${t}」で悩んでる人って、実はここで躓いてることが多い。`,
+    list:`${t}\n\n5位：返信を焦らない\n4位：話しすぎない\n3位：褒めすぎない\n2位：焦りを見せない\n1位：SNSを見せすぎない`
+  }),
+  bias:t=>({
+    short:`${t}——これ、正直に言い切れる人が一番モテる。`,
+    sharp:`「${t}」って言えない人は、まだ恋愛で遠回りしてると思う。`,
+    empathy:`${t}、これ分かる人と分からない人で恋愛の結果が変わる気がする。`,
+    list:`${t}について本音だけ言います。\n\n・余裕がある人が勝つ\n・優しさより安定感\n・追わせた方が上手くいく\n・清潔感は才能じゃなくて習慣`
+  }),
+  psych:t=>({
+    short:`${t}——知ってる人と知らない人で恋愛の勝率が変わる。`,
+    sharp:`${t}って心理学で全部説明できる。モテる人は無意識にこれをやってる。`,
+    empathy:`「なんであの人はモテるんだろう」——答えは${t}にある。`,
+    list:`${t}まとめ\n\n・単純接触効果（見るほど好きになる）\n・希少性の原理（手に入りにくい＝価値高い）\n・返報性の法則（先に与えた方が有利）\n・ハロー効果（清潔感だけで全部良く見える）`
+  }),
+  obs:t=>({
+    short:`${t}——観察してたら全部分かった。`,
+    sharp:`雰囲気がある人の共通点、ずっと観察してたら気づいたことがある。${t}の話。`,
+    empathy:`${t}って、説明できないけど分かる人には分かるやつだと思う。`,
+    list:`雰囲気ある人の特徴\n\n・聞く側に回る\n・リアクションが落ち着いてる\n・誰にでも同じトーン\n・不機嫌を顔に出さない\n・ありがとうが自然に出る`
+  }),
+  aru:t=>({
+    short:`${t}のあるある、全部当てはまったら相当モテてると思う。`,
+    sharp:`モテる人あるある——${t}でまとめると全部「余裕」と「聞く力」に行き着く。`,
+    empathy:`${t}のあるある言います。「わかる」ってなったらフォローして。`,
+    list:`${t}あるある\n\n□ LINEの返信が絶妙に丁寧\n□ 話を引き出すのが上手い\n□ 褒め方がさりげない\n□ いつも安定してる\n□ ありがとうが自然に出る`
+  })
+};
+
+const THREADS_POSTS={
+  ranking:t=>({
+    honest:`${t}って、最近やっと言語化できてきた気がする。`,
+    question:`${t}、みんなはどの順位が一番「わかる」ってなった？`,
+    conversation:`${t}の話を友達にしたら「それ全部俺のことじゃん」って言われた。あるあるすぎて笑えなかった。`,
+    empathy:`${t}って、知識じゃなくて習慣の話なんだよね。分かってるのにできない、が一番つらい。`,
+    closing:`結局、${t}って「余裕を持てるか」だけな気がしてる。`
+  }),
+  bias:t=>({
+    honest:`これ偏見なんですけど、${t}って本当にそうだと思う。反論あればどうぞ。`,
+    question:`${t}——これ、みんなはどう思う？自分もそうだと思う？`,
+    conversation:`友達に「${t}って本当だと思う？」って聞いたら「お前が言うな」って返ってきた。`,
+    empathy:`${t}、分かってても実践できないのが難しいんだよな。`,
+    closing:`${t}、一言で言うなら「自分を信じてる人が最強」ってことだと思う。`
+  }),
+  psych:t=>({
+    honest:`${t}って最初聞いたとき「そんなわけ」ってなったけど、試したらマジだった。`,
+    question:`${t}って聞いて、すぐ使ってみたい場面が浮かんだ人いる？`,
+    conversation:`${t}の話、知人にしたら「それ説明できるの怖い」って言われた。知識って使い方次第だよね。`,
+    empathy:`${t}、これ知ってると恋愛の「なんでこうなるんだろう」がかなり減る。`,
+    closing:`${t}——知ることより、忘れずに使い続けることの方が100倍難しい。`
+  }),
+  obs:t=>({
+    honest:`${t}、観察してると本当によく分かる。自分がどう見られてるかも含めて。`,
+    question:`${t}って、意識してる？それとも自然にそうなってる？`,
+    conversation:`${t}の話を職場の人にしたら「それ私のことだ」って笑ってた。気づいてなかったらしい。`,
+    empathy:`${t}って言葉にするのが難しいんだけど、なんか分かる気がする人いると思う。`,
+    closing:`${t}——雰囲気って作るもんじゃなくて、気づいたらそうなってるもんだと思う。`
+  }),
+  aru:t=>({
+    honest:`${t}のあるある書いてたら自分のことも全部当てはまってて笑えなかった。`,
+    question:`${t}のあるある、いくつ当てはまった？5個以上だったら相当モテると思う。`,
+    conversation:`${t}のあるあるを友達に送ったら「これ全部お前じゃん」って返ってきた。`,
+    empathy:`${t}のあるある——「分かる」ってなった瞬間、何かが繋がる感じがする。`,
+    closing:`${t}のあるある、全部「習慣」に行き着くんだよね。才能じゃなくて。`
+  })
+};
+
 const CTAS={
   line:`詳しい実践方法はLINEで配布してるので、概要欄からぜひ受け取ってください。フォローもよかったら。`,
   follow:`「これ知らなかった」って思ったらフォローお願いします。毎週こういう話を上げてるので。`,
@@ -2661,6 +2743,8 @@ function generateScript(){
   if(typeof currentMode!=='undefined'&&currentMode==='claude'){claudeGenerateScript();return;}
   const theme=document.getElementById('themeInput').value.trim();
   if(!theme){document.getElementById('themeInput').focus();return;}
+  if(currentPlat==='x'){_genXPost(theme);return;}
+  if(currentPlat==='threads'){_genThreadsPost(theme);return;}
   const btn=document.getElementById('genBtn');
   btn.disabled=true;btn.textContent='生成中...';
   document.getElementById('outputPanel').innerHTML=`<div class="loading"><div class="spinner"></div>台本を生成中…</div>`;
@@ -2748,7 +2832,88 @@ const TIPS={
 const PLAT_TIPS={
   tiktok:"TikTok向き：速く・強く・1テーマ1結論。コメントが荒れても伸びる前提で作る。",
   instagram:"Instagram向き：整える・読みやすくする・保存したくなる文にする。",
+  x:"X向き：一文目が命。無駄を削って、真理か共感か対比を一発で立てる。",
+  threads:"Threads向き：少しやわらかく、余白を残す。会話が起きやすい終わり方にする。",
 };
+
+function _genXPost(theme){
+  const btn=document.getElementById('genBtn');
+  btn.disabled=true;btn.textContent='生成中...';
+  setTimeout(()=>{
+    const fn=X_POSTS[currentType]||X_POSTS.ranking;
+    const p=fn(theme);
+    const useHash=document.getElementById('hashToggle').checked;
+    const tags=useHash?getHashtags(document.getElementById('genreSelect').value):[];
+    document.getElementById('outputPanel').innerHTML=`
+    <div class="out-header">
+      <div class="out-meta">
+        <span class="badge badge-x">𝕏 X</span>
+        <span class="badge ${TYPE_BADGES[currentType]||'badge-rank'}">${TYPE_LABELS[currentType]||''}</span>
+      </div>
+      <div class="out-actions"><button class="btn-sm" onclick="generateScript()">再生成</button></div>
+    </div>
+    <div class="out-body">
+      <div style="font-size:11px;color:var(--t3);background:var(--s2);border-radius:6px;padding:8px 12px;margin-bottom:14px">💡 ${PLAT_TIPS.x}</div>
+      ${_xCard('短め（80字）',p.short)}
+      ${_xCard('鋭め（120字）',p.sharp)}
+      ${_xCard('共感版',p.empathy)}
+      ${_xCard('箇条書き版',p.list)}
+      ${useHash&&tags.length?`<div class="hash-section"><div class="hash-title"># ハッシュタグ</div><div class="hash-tags">${tags.map(t=>`<span class="hash-tag">#${htmlEnc(t)}</span>`).join('')}</div></div>`:''}
+    </div>`;
+    btn.disabled=false;btn.textContent='台本を生成する';
+  },300);
+}
+
+function _genThreadsPost(theme){
+  const btn=document.getElementById('genBtn');
+  btn.disabled=true;btn.textContent='生成中...';
+  setTimeout(()=>{
+    const fn=THREADS_POSTS[currentType]||THREADS_POSTS.ranking;
+    const p=fn(theme);
+    const useHash=document.getElementById('hashToggle').checked;
+    const tags=useHash?getHashtags(document.getElementById('genreSelect').value):[];
+    document.getElementById('outputPanel').innerHTML=`
+    <div class="out-header">
+      <div class="out-meta">
+        <span class="badge badge-threads">🧵 Threads</span>
+        <span class="badge ${TYPE_BADGES[currentType]||'badge-rank'}">${TYPE_LABELS[currentType]||''}</span>
+      </div>
+      <div class="out-actions"><button class="btn-sm" onclick="generateScript()">再生成</button></div>
+    </div>
+    <div class="out-body">
+      <div style="font-size:11px;color:var(--t3);background:var(--s2);border-radius:6px;padding:8px 12px;margin-bottom:14px">💡 ${PLAT_TIPS.threads}</div>
+      ${_thCard('本音型',p.honest)}
+      ${_thCard('問いかけ型',p.question)}
+      ${_thCard('会話型',p.conversation)}
+      ${_thCard('共感型',p.empathy)}
+      ${_thCard('締めの一言',p.closing)}
+      ${useHash&&tags.length?`<div class="hash-section"><div class="hash-title"># ハッシュタグ</div><div class="hash-tags">${tags.map(t=>`<span class="hash-tag">#${htmlEnc(t)}</span>`).join('')}</div></div>`:''}
+    </div>`;
+    btn.disabled=false;btn.textContent='台本を生成する';
+  },300);
+}
+
+function _xCard(label,text){
+  if(!text)return'';
+  const chars=text.length;
+  const cls=chars>120?'color:var(--red)':chars>80?'color:var(--amber)':'color:var(--green)';
+  return`<div style="margin-bottom:12px">
+    <div style="font-size:10px;font-weight:700;color:var(--t3);letter-spacing:.5px;text-transform:uppercase;margin-bottom:5px;display:flex;justify-content:space-between">
+      <span>${htmlEnc(label)}</span><span style="${cls}">${chars}字</span>
+    </div>
+    <div style="background:var(--s2);border:1px solid var(--b1);border-radius:7px;padding:12px 14px;font-size:13px;line-height:1.8;color:var(--t1);white-space:pre-wrap;cursor:pointer;transition:background .12s" onclick="copyText('${esc(text)}')" title="クリックでコピー">${htmlEnc(text)}</div>
+    <div style="font-size:9px;color:var(--t3);text-align:right;margin-top:2px">クリックでコピー</div>
+  </div>`;
+}
+
+function _thCard(label,text){
+  if(!text)return'';
+  return`<div style="margin-bottom:12px">
+    <div style="font-size:10px;font-weight:700;color:var(--t3);letter-spacing:.5px;text-transform:uppercase;margin-bottom:5px">${htmlEnc(label)}</div>
+    <div style="background:var(--s2);border:1px solid var(--b1);border-radius:7px;padding:12px 14px;font-size:13px;line-height:1.9;color:var(--t1);white-space:pre-wrap;cursor:pointer;transition:background .12s" onclick="copyText('${esc(text)}')" title="クリックでコピー">${htmlEnc(text)}</div>
+    <div style="font-size:9px;color:var(--t3);text-align:right;margin-top:2px">クリックでコピー</div>
+  </div>`;
+}
 
 function renderOutput(theme,genre,useHash){
   const v=generatedVariants[currentVariant];
